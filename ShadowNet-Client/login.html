@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <!-- הגדרות דף בסיסיות וקידוד תווים -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShadowNet - Secure Login</title>
+    
+    <!-- פונט Inter מבית Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- ספריית אייקונים FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- עיצוב ואייקון מגן של ShadowNet -->
+    <link rel="icon" type="image/png" href="shadownet-shield-logo.png">
+    <link rel="stylesheet" href="style.css?v=14">
+    <!-- סקריפט אימות שדות משותף -->
+    <script src="validation.js?v=3"></script>
+</head>
+<body>
+
+    <div class="app-card">
+
+        <!-- חלק שמאלי: מיתוג ולוגו המערכת -->
+        <div class="brand-side">
+            <div class="brand-content">
+                <div class="logo-container">
+                    <img src="shadownet-shield-logo.png" alt="ShadowNet Logo" class="brand-logo-img">
+                </div>
+                <p class="app-tagline">CYBER SECURITY &amp; VERIFICATION</p>
+            </div>
+        </div>
+
+        <!-- חלק ימני: טופס התחברות -->
+        <div class="login-side">
+            
+            <div class="login-header">
+                <h2 class="login-title">ShadowNet</h2>
+                <p class="login-subtitle">Enter your ShadowNet credentials or <a href="signup.html?v=shield" class="signup-link">Sign up</a></p>
+            </div>
+
+            <!-- הודעת סטטוס (שגיאה או הצלחה) -->
+            <div id="status-message" class="status-msg" style="display: none;"></div>
+
+            <!-- טופס התחברות ראשי (שלב 1) -->
+            <form id="login-form-step1" onsubmit="return handleInitialLogin(event);" class="login-form">
+                
+                <!-- שדה אימייל -->
+                <div class="form-field">
+                    <label for="user-email" class="field-label">Email Address</label>
+                    <input type="text" id="user-email" class="field-input"
+                           placeholder="name@company.com"
+                           autocomplete="email"
+                           oninput="liveValidateLoginEmail()"
+                           onblur="liveValidateLoginEmail(true)">
+                    <span class="field-error" id="login-email-error"></span>
+                </div>
+
+                <!-- שדה סיסמה עם כפתור עין -->
+                <div class="form-field">
+                    <label for="user-password" class="field-label">Password</label>
+                    <div class="password-box">
+                        <input type="password" id="user-password" class="field-input"
+                               placeholder="••••••••"
+                               autocomplete="current-password"
+                               oninput="liveValidateLoginPassword()"
+                               onblur="liveValidateLoginPassword(true)">
+                        <button type="button" class="eye-btn" id="eye-toggle-btn" onclick="toggleVisibility('user-password', 'eye-toggle-btn', event)" title="Show/Hide Password" aria-label="Toggle password visibility">
+                            <svg class="eye-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                    <span class="field-error" id="login-password-error"></span>
+                </div>
+
+                <!-- אפשרויות זכור אותי ושכחתי סיסמה -->
+                <div class="options-row">
+                    <a href="forgot-password.html?v=shield" class="forgot-link">Forgot password?</a>
+                    <label class="remember-box">
+                        <span class="remember-label">Remember me</span>
+                        <input type="checkbox" id="remember-me-checkbox" class="remember-checkbox">
+                    </label>
+                </div>
+
+                <!-- כפתור כניסה לחשבון -->
+                <button type="submit" class="submit-btn" id="login-submit-btn">Login to Account</button>
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- לוגיקת JavaScript של דף ההתחברות -->
+    <script>
+        // כתובת השרת
+        const API_BASE = (window.location.port === '5000') ? window.location.origin : 'http://localhost:5000';
+
+        // הצגת הודעה גלובלית בראש הטופס
+        function showMessage(text, isError = false) {
+            const msgEl = document.getElementById("status-message"); // אלמנט ההודעה
+            if (msgEl) {
+                msgEl.innerText = text; // טקסט ההודעה
+                msgEl.className = "status-msg " + (isError ? "status-error" : "status-success"); // צבע אדום או ירוק
+                msgEl.style.display = "block"; // הצגה
+            }
+        }
+
+        // בדיקה בעת פתיחת הדף אם הגענו מיד לאחר הרשמה מוצלחת
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('registered') === 'true') {
+                const email = params.get('email'); // חילוץ האימייל מהכתובת
+                if (email) {
+                    document.getElementById('user-email').value = email; // שתילה בשדה
+                }
+                showMessage("✓ Registration completed successfully! You can now log in.", false);
+            }
+        });
+
+        // בדיקת תקינות אימייל בזמן אמת
+        function liveValidateLoginEmail(force = false) {
+            const el = document.getElementById('user-email'); // שדה האימייל
+            const err = document.getElementById('login-email-error'); // אלמנט השגיאה
+            const val = el.value.trim(); // הערך הנקי
+
+            if (!val) {
+                if (force) { setFieldError(el, err, 'Please enter your email address'); return false; }
+                clearField(el, err);
+                return true;
+            }
+
+            const check = isValidEmail(val); // בדיקה מול פונקציית האימות
+            if (!check.ok) {
+                setFieldError(el, err, check.msg); // הצגת השגיאה
+                return false;
+            }
+            setFieldOk(el, err); // סימון כתקין
+            return true;
+        }
+
+        // בדיקת תקינות סיסמה בזמן אמת
+        function liveValidateLoginPassword(force = false) {
+            const el = document.getElementById('user-password'); // שדה הסיסמה
+            const err = document.getElementById('login-password-error'); // אלמנט השגיאה
+            const val = el.value;
+
+            if (!val) {
+                if (force) { setFieldError(el, err, 'Please enter your password'); return false; }
+                clearField(el, err);
+                return true;
+            }
+            if (val.length < 6) {
+                setFieldError(el, err, 'Password must be at least 6 characters'); // מינימום 6 תווים
+                return false;
+            }
+            setFieldOk(el, err); // סימון כתקין
+            return true;
+        }
+
+        // שליחת טופס ההתחברות לשרת
+        async function handleInitialLogin(event) {
+            event.preventDefault(); // מניעת רענון הדף
+
+            // בדיקת שני השדות
+            const emailOk = liveValidateLoginEmail(true);
+            const passOk = liveValidateLoginPassword(true);
+            if (!emailOk || !passOk) {
+                showMessage("Please fix the highlighted errors above.", true);
+                return false;
+            }
+
+            const email = document.getElementById("user-email").value.trim(); // קריאת האימייל
+            const password = document.getElementById("user-password").value; // קריאת הסיסמה
+            const btn = document.getElementById("login-submit-btn"); // כפתור הכניסה
+
+            btn.disabled = true; // נטרול כפתור
+            btn.innerText = "Signing in..."; // שינוי טקסט
+
+            try {
+                // שליחת בקשה לשרת
+                const response = await fetch(`${API_BASE}/api/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email, password: password })
+                });
+
+                const data = await response.json(); // פענוח תשובה
+
+                if (response.ok && data.success) {
+                    showMessage("✓ " + (data.message || "Logged in successfully!"), false);
+
+                    // שמירת פרטי המשתמש בסשן
+                    sessionStorage.setItem("currentUser", JSON.stringify({
+                        email: data.email,
+                        userId: data.userId,
+                        username: data.username,
+                        fullName: data.fullName,
+                        sha256: data.sha256
+                    }));
+
+                    // בדיקה האם זה מנהל המערכת (28yonatan@gmail.com)
+                    const isAdmin = (data.email || '').toLowerCase().trim() === '28yonatan@gmail.com';
+                    btn.innerText = "✓ Success!";
+                    
+                    // הפניה לדף המתאים
+                    setTimeout(() => {
+                        if (isAdmin) {
+                            window.location.href = "admin/admin.html"; // מנהל מועבר לאדמין
+                        } else {
+                            window.location.href = "dashboard.html"; // משתמש רגיל מועבר לאזור אישי
+                        }
+                    }, 500);
+                    return false;
+                } else {
+                    showMessage("✗ " + (data.message || "Invalid email or password"), true);
+                    btn.disabled = false;
+                    btn.innerText = "Login to Account";
+                }
+            } catch (err) {
+                console.error(err);
+                showMessage("✗ Connection error with ShadowNet server: " + err.message, true);
+                btn.disabled = false;
+                btn.innerText = "Login to Account";
+            }
+
+            return false;
+        }
+    </script>
+
+</body>
+</html>

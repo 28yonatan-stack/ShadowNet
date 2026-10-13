@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <!-- הגדרת גרסת היעד של פלטפורמת .NET 8 -->
+    <TargetFramework>net8.0</TargetFramework>
+    <!-- הפעלת מנגנון הגנה מפני ערכי Null -->
+    <Nullable>enable</Nullable>
+    <!-- ייבוא אוטומטי של ספריות בסיסיות של C# -->
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- שם קובץ ההרצה וה-Assembly החדש של הפרויקט - ShadowNet -->
+    <AssemblyName>ShadowNet.Server</AssemblyName>
+    <!-- שם הפרויקט המלא בריצה -->
+    <RootNamespace>ShadowNet.Server</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- חבילת החיבור למסד הנתונים PostgreSQL -->
+    <PackageReference Include="Npgsql" Version="8.0.4" />
+    <!-- חבילת ממשק התיעוד והבדיקות של Swagger -->
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <!-- חתימה דיגיטלית אוטומטית בעת בנייה למניעת חסימת Smart App Control של Windows -->
+  <Target Name="AutoSignOutput" AfterTargets="AfterBuild">
+    <Exec Command="powershell -NoProfile -Command &quot;$c = Get-ChildItem -Path Cert:\CurrentUser\My | Where-Object { $_.Subject -like '*ShadowNetLocalDev*' } | Select-Object -First 1; if ($c) { Set-AuthenticodeSignature -FilePath '$(TargetPath)' -Certificate $c -ErrorAction SilentlyContinue; $exe = [System.IO.Path]::ChangeExtension('$(TargetPath)', '.exe'); if (Test-Path $exe) { Set-AuthenticodeSignature -FilePath $exe -Certificate $c -ErrorAction SilentlyContinue } }&quot;" ContinueOnError="true" />
+  </Target>
+
+</Project>

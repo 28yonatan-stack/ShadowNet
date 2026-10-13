@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "ObGlk7VticspemK/sb3HFp7eE2Ml/aqoMvG5LMLWeJo=",
+  "Source": "ShadowNet.Server",
+  "BasePath": "_content/ShadowNet.Server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

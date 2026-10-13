@@ -1,0 +1,646 @@
+* { /* איפוס כללי לכל הרכיבים בדף */
+    box-sizing: border-box; /* הכללת מסגרות ושוליים בחישוב גודל הרכיב */
+    margin: 0; /* איפוס שוליים חיצוניים */
+    padding: 0; /* איפוס שוליים פנימיים */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; /* הגדרת הפונט הראשי */
+}
+
+html, body { /* הגדרת ממדי המסך הראשי של הדפדפן */
+    width: 100vw; /* רוחב מסך מלא */
+    height: 100vh; /* גובה מסך מלא מדויק */
+    max-height: 100vh; /* מניעת חריגת גובה */
+    overflow: hidden; /* מניעה מוחלטת של פסי גלילה במסך */
+    background-color: #ffffff; /* רקע בסיסי */
+}
+
+body { /* עיצוב גוף המסמך הראשי */
+    display: flex; /* שימוש ב-Flexbox לפריסה אופקית */
+    width: 100vw; /* רוחב מלא של החלון */
+    height: 100vh; /* גובה מלא של החלון */
+    overflow: hidden; /* ביטול גלילה */
+}
+
+.app-card { /* מעטפת המערכת הראשית הפרוסה על כל המסך (חלוקה שווה: 50% תמונה, 50% לוגין) */
+    display: flex; /* הצגת שני החצאים זה לצד זה */
+    width: 100vw; /* פריסה על 100% מרוחב החלון */
+    height: 100vh; /* פריסה על 100% מגובה החלון */
+    border-radius: 0; /* ללא פינות מעוגלות */
+    box-shadow: none; /* ללא צל חיצוני */
+    border: none; /* ללא מסגרות */
+    overflow: hidden; /* מניעת גלילה */
+}
+
+/* ========================================================================= */
+/* אזור שמאל - בדיוק 50% מהמסך עם הלוגו החדש (מגן ShadowNet) */
+/* ========================================================================= */
+.brand-side { /* צד שמאל - תופס בדיוק חצי מסך */
+    width: 50vw; /* בדיוק 50% מרוחב המסך לחלוקת חצי-חצי */
+    flex: 0 0 50vw; /* קיבוע רוחב של 50% בדיוק ללא כיווץ */
+    height: 100vh; /* גובה מסך מלא */
+    background-color: #03060d; /* צבע שחור התואם בדיוק את רקע תמונת הלוגו */
+    display: flex; /* תצוגת פלקס */
+    flex-direction: column; /* סידור אנכי */
+    justify-content: center; /* מרכוז אנכי */
+    align-items: center; /* מרכוז אופקי */
+    position: relative; /* מיקום יחסי עבור שכבות */
+    overflow: hidden; /* חיתוך תוכן חורג */
+    padding: 0; /* ללא ריווח פנימי */
+    border-right: 1px solid #e2e8f0; /* קו הפרדה עדין ונקי בדיוק באמצע המסך */
+}
+
+.brand-content { /* מעטפת שקופה שמכסה את כל הצד השמאלי */
+    width: 100%; /* רוחב מלא של הצד השמאלי */
+    height: 100%; /* גובה מלא של הצד השמאלי */
+    display: flex; /* תצוגת פלקס */
+    flex-direction: column; /* סידור אנכי */
+    justify-content: center; /* מרכוז אנכי */
+    align-items: center; /* מרכוז אופקי */
+    position: relative; /* מיקום יחסי */
+}
+
+.logo-container { /* מיכל הלוגו שממלא את כל הצד השמאלי */
+    width: 100%; /* רוחב מלא */
+    height: 100%; /* גובה מלא */
+    display: flex; /* מרכוז בפלקס */
+    justify-content: center; /* מרכוז אופקי */
+    align-items: center; /* מרכוז אנכי */
+    position: absolute; /* מיקום מוחלט כדי למלא את כל השטח */
+    top: 0; /* הצמדה לראש */
+    left: 0; /* הצמדה לשמאל */
+}
+
+.brand-logo-img { /* תמונת הלוגו החדשה עם המגן של ShadowNet */
+    width: 100%; /* רוחב מלא */
+    height: 100%; /* גובה מלא */
+    object-fit: contain; /* הצגת כל הלוגו בשלמותו במרכז ללא חיתוך */
+    object-position: center; /* מרכוז מושלם של התמונה */
+    display: block; /* תצוגת בלוק */
+}
+
+.app-tagline { /* כיתוב סלוגן בתחתית הלוגו במידת הצורך */
+    display: none; /* מוסתר כדי להבטיח מראה נקי וממוקד בלוגו */
+}
+
+/* ========================================================================= */
+/* אזור ימין - בדיוק 50% מהמסך, רקע לבן עם טופס התחברות צר, אלגנטי ומדויק */
+/* ========================================================================= */
+.login-side { /* צד ימין - בדיוק 50% מהמסך, רקע לבן נקי */
+    width: 50vw; /* בדיוק 50% מרוחב המסך לחלוקת חצי-חצי */
+    flex: 0 0 50vw; /* קיבוע רוחב של 50% בדיוק ללא כיווץ */
+    height: 100vh; /* גובה מסך מלא */
+    background-color: #ffffff; /* רקע לבן נקי כפי שביקשת */
+    display: flex; /* סידור בפלקס */
+    flex-direction: column; /* סידור אנכי */
+    justify-content: center; /* מרכוז מושלם לגובה ללא צורך בגלילה */
+    align-items: center; /* מרכוז אופקי של הטופס הצר במרכז החצי הימני */
+    padding: 20px 40px; /* ריווח פנימי נעים */
+    overflow: hidden; /* מניעה מוחלטת של פסי גלילה */
+    position: relative; /* מיקום יחסי */
+}
+
+.login-header { /* אזור הכותרת של הטופס - צר וממורכז */
+    width: 100%; /* רוחב מלא של המיכל */
+    max-width: 380px; /* רוחב צר ואלגנטי לבקשתך */
+    text-align: center; /* יישור למרכז */
+    margin-bottom: 24px; /* מרווח תחתון עדין */
+}
+
+.login-title { /* כותרת ראשית מעוצבת בצבעי מדרג הלוגו של ShadowNet */
+    font-size: 32px; /* גודל פונט מאוזן ומרשים */
+    font-weight: 800; /* עובי מודגש מאוד */
+    background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 50%, #38bdf8 100%); /* מדרג צבעי הלוגו הכחול */
+    -webkit-background-clip: text; /* חיתוך הרקע לתוך הטקסט */
+    -webkit-text-fill-color: transparent; /* הפיכת הפונט לשקוף עבור הגרדיאנט */
+    background-clip: text; /* תמיכה סטנדרטית */
+    letter-spacing: -0.5px; /* צפיפות אותיות מודרנית */
+    margin-bottom: 6px; /* מרווח תחתון */
+}
+
+.login-subtitle { /* תת כותרת מתחת לשם המערכת */
+    font-size: 13px; /* גודל טקסט עדין וקריא */
+    color: #64748b; /* צבע אפור אלגנטי על רקע לבן */
+    font-weight: 500; /* עובי פונט בינוני */
+}
+
+.signup-link { /* קישור מעבר בין הדפים */
+    color: #0284c7; /* צבע כחול מותאם בדיוק ללוגו */
+    font-weight: 700; /* עובי מודגש */
+    text-decoration: none; /* ללא קו תחתון */
+    transition: color 0.2s ease; /* מעבר חלק */
+}
+
+.signup-link:hover { /* מעבר עכבר על הקישור */
+    color: #0ea5e9; /* גוון תכלת בהיר יותר */
+    text-decoration: underline; /* קו תחתון בריחוף */
+}
+
+.login-form { /* טופס ההתחברות וההרשמה - צר ומדויק */
+    width: 100%; /* רוחב מלא של המיכל */
+    max-width: 380px; /* רוחב צר ואלגנטי כפי שביקשת */
+}
+
+.form-field { /* מעטפת שדה קלט */
+    width: 100%; /* רוחב מלא */
+    text-align: left; /* יישור לשמאל לשדות אנגלית */
+    margin-bottom: 15px; /* מרווח תחתון מותאם ללא גלילה */
+}
+
+.field-label { /* תווית מעל שדה הקלט - בצבע כחול הלוגו */
+    display: block; /* שורה נפרדת */
+    font-size: 11px; /* גודל טקסט עדין ומדויק */
+    font-weight: 700; /* עובי מודגש */
+    color: #0284c7; /* צבע כחול הלוגו */
+    margin-bottom: 6px; /* מרווח מהשדה */
+    text-transform: uppercase; /* אותיות גדולות באנגלית */
+    letter-spacing: 0.8px; /* רווח אותיות יוקרתי */
+}
+
+.password-box { /* מעטפת שדה סיסמה עם אייקון עין */
+    position: relative; /* מיקום יחסי להצבת העין */
+    display: flex; /* סידור אופקי */
+    align-items: center; /* מרכוז אנכי */
+    width: 100%; /* רוחב מלא */
+}
+
+.password-box .field-input { /* שדה סיסמה בתוך המעטפת - מרווח לאייקון העין */
+    padding-right: 42px; /* מרווח ימני כדי שהעין לא תכסה את הטקסט */
+}
+
+.field-input { /* שדות הזנת המידע - עיצוב נקי וצר על רקע לבן */
+    width: 100%; /* רוחב מלא */
+    padding: 11px 14px; /* ריווח פנימי נוח */
+    background-color: #f8fafc; /* רקע אפור בהיר מאוד על לבן */
+    border: 1.5px solid #cbd5e1; /* מסגרת אפורה עדינה */
+    border-radius: 8px; /* פינות מעוגלות */
+
+    font-size: 14px; /* גודל פונט הקלדה */
+    color: #0f172a; /* צבע טקסט כהה קריא וברור על רקע לבן */
+    outline: none; /* הסרת מסגרת דפדפן ברירת מחדל */
+    transition: all 0.2s ease; /* אנימציית מעבר חלקה */
+}
+
+/* ביטול אייקון העין השחור המובנה של דפדפני Edge ו-Windows */
+.field-input::-ms-reveal,
+.field-input::-ms-clear {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* ביטול כפתורי מילוי אוטומטי מובנים */
+.field-input::-webkit-contacts-auto-fill-button,
+.field-input::-webkit-credentials-auto-fill-button {
+    visibility: hidden;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+}
+
+.field-input::placeholder { /* עיצוב טקסט הרמז בתוך השדה */
+    color: #94a3b8; /* צבע אפור אלגנטי */
+    font-size: 13px; /* גודל טקסט הרמז */
+}
+
+.field-input:focus { /* בעת פוקוס והקלדה בשדה */
+    border-color: #0284c7; /* מסגרת כחולה בוהקת בצבע הלוגו */
+    background-color: #ffffff; /* רקע לבן צח בפוקוס */
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15); /* הילה כחולה עדינה */
+}
+
+.eye-btn { /* כפתור הצגה והסתרת סיסמה - כפתור לחיץ נקי ומדויק */
+    position: absolute; /* מיקום מוחלט בתוך שדה הסיסמה */
+    right: 10px; /* הצמדה לצד ימין של השדה */
+    top: 50%; /* מרכוז אנכי מדויק */
+    transform: translateY(-50%); /* קיזוז אנכי */
+    cursor: pointer; /* סמן לחיצה */
+    color: #0284c7; /* צבע כחול הלוגו של ShadowNet */
+    padding: 6px; /* שטח לחיצה נוח */
+    z-index: 25; /* שכבה עליונה מעל שדה הקלט */
+    pointer-events: auto; /* מאפשר לחיצה ישירה */
+    background: transparent; /* ללא רקע */
+    border: none; /* ללא מסגרת */
+    outline: none; /* ללא קו מתאר */
+    display: inline-flex; /* תצוגת פלקס */
+    align-items: center; /* מרכוז אנכי */
+    justify-content: center; /* מרכוז אופקי */
+    border-radius: 6px; /* פינות מעוגלות */
+    transition: all 0.2s ease; /* מעבר חלק בריחוף */
+    user-select: none; /* מניעת בחירת טקסט */
+    -webkit-user-select: none; /* תמיכה בדפדפני וובקיט */
+}
+
+.eye-btn:hover { /* בריחוף מעל כפתור העין */
+    color: #0284c7; /* כחול הלוגו */
+    background-color: rgba(2, 132, 199, 0.1); /* רקע תכלת שקוף עדין */
+}
+
+.eye-svg { /* עיצוב אייקון ה-SVG הפנימי של העין */
+    width: 20px; /* רוחב האייקון */
+    height: 20px; /* גובה האייקון */
+    pointer-events: none; /* מניעת חסימת לחיצה על הכפתור */
+    stroke: currentColor; /* צבע קו תואם לצבע הכפתור */
+}
+
+
+
+.options-row { /* שורת אפשרויות זכור אותי ושכחתי סיסמה */
+    display: flex; /* סידור אופקי */
+    justify-content: space-between; /* פיזור לקצוות */
+    align-items: center; /* מרכוז אנכי */
+    font-size: 12px; /* גודל טקסט */
+    margin-bottom: 18px; /* מרווח תחתון */
+    width: 100%; /* רוחב מלא */
+}
+
+.forgot-link { /* קישור לשכחתי סיסמה */
+    color: #0284c7; /* צבע כחול הלוגו */
+    text-decoration: none; /* ללא קו תחתון */
+    font-weight: 600; /* עובי מודגש */
+    transition: color 0.2s ease; /* מעבר חלק */
+}
+
+.forgot-link:hover { /* מעבר עכבר על קישור שכחתי סיסמה */
+    color: #0ea5e9; /* תכלת בהיר */
+    text-decoration: underline; /* קו תחתון */
+}
+
+.remember-box { /* תיבת זכור אותי */
+    display: flex; /* סידור אופקי */
+    align-items: center; /* מרכוז אנכי */
+    gap: 7px; /* מרווח בין הצ'קבוקס לטקסט */
+    color: #475569; /* צבע אפור כהה קריא על רקע לבן */
+    cursor: pointer; /* סמן לחיצה */
+}
+
+.remember-label { /* טקסט זכור אותי */
+    user-select: none; /* מניעת בחירת טקסט */
+    font-size: 12px; /* גודל טקסט */
+    font-weight: 500; /* עובי פונט */
+}
+
+.remember-checkbox { /* תיבת הסימון */
+    cursor: pointer; /* סמן לחיצה */
+    accent-color: #0284c7; /* צבע כחול הלוגו */
+    width: 15px; /* רוחב */
+    height: 15px; /* גובה */
+}
+
+.submit-btn { /* כפתור שליחת הטופס הראשי - מעוצב בגרדיאנט הלוגו של ShadowNet */
+    width: 100%; /* רוחב מלא */
+    padding: 12px 18px; /* ריווח פנימי מדויק */
+    background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 50%, #38bdf8 100%); /* גרדיאנט הצבעים המדויק של הלוגו */
+    color: #ffffff; /* טקסט לבן ברור */
+    border: none; /* ללא מסגרת */
+    border-radius: 8px; /* פינות מעוגלות */
+    font-size: 15px; /* גודל פונט ברור */
+    font-weight: 700; /* עובי מודגש */
+    cursor: pointer; /* סמן יד */
+    transition: all 0.25s ease; /* מעבר חלק */
+    box-shadow: 0 4px 16px rgba(2, 132, 199, 0.35); /* צל כחול עדין */
+    letter-spacing: 0.5px; /* רווח אותיות */
+}
+
+.submit-btn:hover { /* מעבר עכבר על כפתור השליחה */
+    background: linear-gradient(135deg, #0369a1 0%, #0284c7 50%, #0ea5e9 100%); /* שינוי מדרג צבעים */
+    box-shadow: 0 6px 22px rgba(2, 132, 199, 0.5); /* חיזוק הצל */
+    transform: translateY(-2px); /* הגבהה קלה */
+}
+
+.submit-btn:disabled { /* כפתור מושבת בעת טעינה */
+    background: #cbd5e1; /* צבע אפור בהיר */
+    color: #94a3b8; /* טקסט אפור */
+    cursor: not-allowed; /* ללא סמן לחיצה */
+    box-shadow: none; /* ביטול צל */
+    transform: none; /* ביטול הגבהה */
+}
+
+/* ========================================================================= */
+/* שלב אימות קוד דוא"ל (Email OTP) - מעוצב נקי ואלגנטי כמו דף התחברות רגיל */
+/* ========================================================================= */
+.otp-box { /* תיבת אימות ה-OTP - עיצוב נקי ויוקרתי המשתלב בטופס */
+    background: transparent; /* רקע שקוף נקי להשתלבות מלאה ברקע הלבן */
+    border: none; /* ללא מסגרת מגושמת */
+    border-radius: 0; /* ללא עיגול חיצוני */
+    padding: 0; /* ללא ריפוד מיותר */
+    margin-bottom: 20px; /* מרווח תחתון עדין */
+    text-align: center; /* יישור למרכז */
+    width: 100%; /* רוחב מלא של המיכל */
+}
+
+.otp-title { /* כותרת אימות הדוא"ל */
+    font-size: 15px; /* גודל פונט מאוזן */
+    font-weight: 700; /* עובי מודגש */
+    color: #0284c7; /* צבע כחול הלוגו */
+    margin-bottom: 6px; /* מרווח תחתון */
+    text-transform: uppercase; /* אותיות מודגשות */
+    letter-spacing: 0.5px; /* ריווח אותיות */
+}
+
+.otp-desc { /* הסבר על קוד האימות */
+    font-size: 13px; /* גודל טקסט ברור וקריא */
+    color: #64748b; /* צבע אפור אלגנטי על רקע לבן */
+    margin-bottom: 12px; /* מרווח תחתון */
+    line-height: 1.5; /* גובה שורה מרווח */
+    direction: ltr; /* כיווניות שמאל-ימין למניעת היפוך סימני פיסוק */
+    text-align: center; /* מרכוז הטקסט */
+}
+
+.otp-email-highlight { /* הדגשת כתובת המייל */
+    font-weight: 700; /* עובי מודגש */
+    color: #0284c7; /* צבע כחול הלוגו */
+    word-break: break-all; /* שבירת מילים תקינה */
+}
+
+.otp-boxes-container { /* מעטפת ששת קוביות הקוד הנפרדות */
+    display: flex; /* סידור אופקי בפלקס */
+    justify-content: center; /* מרכוז אופקי של ששת הקוביות */
+    align-items: center; /* מרכוז אנכי */
+    gap: 8px; /* מרווח מדויק בין כל קובייה לקובייה */
+    direction: ltr; /* כיווניות משמאל לימין לספרות הקוד */
+    margin: 16px 0; /* מרווח עליון ותחתון */
+    width: 100%; /* רוחב מלא */
+}
+
+.otp-box-digit { /* קובייה בודדת עבור ספרה אחת של קוד האימות */
+    width: 46px; /* רוחב הקובייה */
+    height: 54px; /* גובה הקובייה */
+    font-size: 24px; /* גודל פונט הספרה */
+    font-weight: 800; /* עובי מודגש מאוד לספרה */
+    text-align: center; /* מרכוז מושלם של הספרה בתוך הקובייה */
+    font-family: Consolas, monospace; /* פונט מונוספייס מתמטי */
+    border: 1.5px solid #cbd5e1; /* מסגרת ברירת מחדל אפורה נקייה */
+    border-radius: 10px; /* פינות מעוגלות מודרניות */
+    color: #0284c7; /* צבע הספרה בכחול הלוגו של ShadowNet */
+    background-color: #f8fafc; /* רקע עדין ויוקרתי */
+    outline: none; /* הסרת מסגרת דפדפן ברירת מחדל */
+    transition: all 0.2s ease; /* מעבר חלק בריחוף ובפוקוס */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* צללית קלה ויוקרתית */
+}
+
+.otp-box-digit:focus { /* בעת פוקוס והקלדה בקובייה */
+    border-color: #0284c7; /* מסגרת כחולה בוהקת בצבע הלוגו */
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2); /* הילה כחולה יוקרתית */
+    background-color: #ffffff; /* רקע לבן צח */
+}
+
+.otp-box-digit.filled { /* קובייה המכילה ספרה מוזנת */
+    border-color: #0284c7; /* מסגרת כחולה ברורה */
+    background-color: #ffffff; /* רקע לבן נקי */
+}
+
+.otp-box-digit:disabled { /* קובייה מושבתת כאשר פג תוקף הקוד */
+    background-color: #f1f5f9; /* רקע אפור מנוטרל */
+    border-color: #e2e8f0; /* מסגרת בהירה מנוטרלת */
+    color: #94a3b8; /* ספרה אפורה מנוטרלת */
+    cursor: not-allowed; /* ללא סמן עכבר */
+}
+
+.otp-timer-box { /* תיבת הצגת טיימר הספירה לאחור של 10 דקות */
+    display: inline-flex; /* פלקס פנימי */
+    align-items: center; /* מרכוז אנכי */
+    justify-content: center; /* מרכוז אופקי */
+    gap: 7px; /* מרווח בין האייקון לטקסט */
+    font-size: 13px; /* גודל פונט ברור */
+    font-weight: 600; /* עובי מודגש */
+    color: #0284c7; /* צבע כחול הלוגו */
+    background: rgba(2, 132, 199, 0.08); /* רקע תכלת שקוף עדין */
+    border: 1px solid rgba(2, 132, 199, 0.25); /* מסגרת תכלת עדינה */
+    padding: 6px 14px; /* ריווח פנימי */
+    border-radius: 20px; /* עיצוב קפסולה מודרני */
+    margin: 8px auto 14px auto; /* מרווחים ממורכזים */
+    direction: ltr; /* כיווניות משמאל לימין למניעת היפוך שעון וטקסט באנגלית */
+}
+
+.inbox-hint-box { /* תיבת קישור לפתיחת תיבת הדואר הוירטואלית לבדיקות */
+    margin: 10px 0 14px 0; /* מרווחים חיצוניים */
+    text-align: center; /* מרכוז האלמנט */
+}
+
+.open-inbox-link { /* כפתור וקישור מעוצב לפתיחת תיבת הדואר בלשונית חדשה */
+    display: inline-flex; /* תצוגת פלקס אופקית */
+    align-items: center; /* מרכוז אנכי */
+    gap: 7px; /* רווח בין האייקון לטקסט */
+    background: #f0f9ff; /* רקע תכלת בהיר עדין */
+    color: #0284c7; /* צבע כחול הלוגו של ShadowNet */
+    border: 1px solid #bae6fd; /* מסגרת תכלת אלגנטית */
+    padding: 7px 15px; /* ריווח פנימי נוח */
+    border-radius: 20px; /* עיצוב קפסולה מודרני */
+    font-size: 12px; /* גודל טקסט עדין וקריא */
+    font-weight: 600; /* עובי מודגש */
+    text-decoration: none; /* ללא קו תחתון */
+    transition: all 0.2s ease; /* מעבר חלק בריחוף */
+    box-shadow: 0 2px 4px rgba(2, 132, 199, 0.08); /* צללית עדינה */
+}
+
+.open-inbox-link:hover { /* מעבר עכבר על קישור פתיחת תיבת הדואר */
+    background: #e0f2fe; /* רקע מעט כהה יותר */
+    border-color: #7dd3fc; /* מסגרת כחולה בולטת יותר */
+    transform: translateY(-1px); /* הגבהה קלה */
+}
+
+.otp-timer-box i { /* אייקון השעון בתוך הטיימר */
+    font-size: 14px; /* גודל האייקון */
+}
+
+.otp-timer-box.timer-warning { /* התראת זמן שנותר פחות מדקה */
+    color: #ea580c; /* צבע כתום */
+    background: #fff7ed; /* רקע כתמתם */
+    border-color: #fdba74; /* מסגרת כתומה */
+}
+
+.otp-timer-box.timer-expired { /* מצב שבו פג תוקף הקוד לאחר 10 דקות */
+    color: #dc2626; /* צבע אדום בולט */
+    background: #fef2f2; /* רקע אדמדם */
+    border-color: #fca5a5; /* מסגרת אדומה */
+}
+
+.otp-actions { /* שורת פעולות נוספות באימות */
+    display: flex; /* תצוגת פלקס */
+    justify-content: space-between; /* פיזור לצדדים */
+    align-items: center; /* מרכוז אנכי */
+    font-size: 11px; /* גודל טקסט */
+    margin-top: 8px; /* מרווח עליון */
+}
+
+.resend-btn { /* כפתור שליחה חוזרת */
+    background: none; /* שקוף */
+    border: none; /* ללא מסגרת */
+    color: #0284c7; /* צבע כחול הלוגו */
+    font-size: 11px; /* גודל טקסט */
+    font-weight: 600; /* עובי מודגש */
+    cursor: pointer; /* סמן יד */
+    text-decoration: underline; /* קו תחתון */
+}
+
+.resend-btn:hover { /* מעבר עכבר על כפתור שליחה חוזרת */
+    color: #0ea5e9; /* כחול בהיר */
+}
+
+.resend-btn:disabled { /* מושבת */
+    color: #94a3b8; /* אפור */
+    cursor: not-allowed; /* ללא לחיצה */
+    text-decoration: none; /* ללא קו */
+}
+
+.back-step-btn { /* כפתור חזרה לשלב הקודם */
+    background: none; /* שקוף */
+    border: none; /* ללא מסגרת */
+    color: #64748b; /* צבע אפור על לבן */
+    font-size: 11px; /* גודל טקסט */
+    cursor: pointer; /* סמן יד */
+}
+
+.back-step-btn:hover { /* מעבר עכבר על כפתור חזרה */
+    color: #0f172a; /* כהה יותר */
+    text-decoration: underline; /* קו תחתון */
+}
+
+.dev-code-hint { /* תיבת רמז קוד לבדיקות */
+    background-color: #f0f9ff; /* רקע תכלת בהיר */
+    border: 1px dashed #0284c7; /* מסגרת מקווקוות כחולה */
+    border-radius: 8px; /* עיגול פינות */
+    padding: 8px 12px; /* ריווח פנימי */
+    font-size: 11px; /* גודל טקסט */
+    color: #0284c7; /* צבע כחול */
+    margin-top: 10px; /* מרווח עליון */
+    display: none; /* מוסתר כברירת מחדל */
+    direction: rtl; /* עברית */
+}
+
+.back-to-login-box { /* קופסת קישור חזרה להתחברות */
+    text-align: center; /* מרכוז */
+    margin-top: 16px; /* מרווח עליון */
+    width: 100%; /* רוחב מלא */
+}
+
+.back-link { /* קישור חזרה */
+    color: #0284c7; /* צבע כחול הלוגו */
+    font-size: 12px; /* גודל פונט */
+    font-weight: 600; /* עובי מודגש */
+    text-decoration: none; /* ללא קו */
+    transition: color 0.2s ease; /* מעבר חלק */
+}
+
+.back-link:hover { /* מעבר עכבר */
+    color: #0ea5e9; /* כחול בהיר */
+    text-decoration: underline; /* קו תחתון */
+}
+
+/* ========================================================================= */
+/* הודעות סטטוס והצלחה/שגיאה על רקע לבן */
+/* ========================================================================= */
+.status-msg { /* הודעת משוב כללית */
+    width: 100%; /* רוחב מלא של המיכל */
+    max-width: 380px; /* רוחב מותאם לגודל הטופס הצר */
+    margin-bottom: 14px; /* מרווח תחתון */
+    padding: 10px 14px; /* ריווח פנימי */
+    border-radius: 8px; /* עיגול פינות */
+    font-size: 13px; /* גודל טקסט ברור */
+    line-height: 1.4; /* גובה שורה */
+    text-align: center; /* מרכוז */
+    direction: ltr; /* כיווניות תקינה */
+    unicode-bidi: plaintext; /* תמיכה אוטומטית בעברית ובאנגלית ללא היפוך סימני פיסוק */
+    word-break: break-word; /* שבירת מילים תקינה */
+}
+
+
+.status-error { /* עיצוב הודעת שגיאה */
+    background-color: #fef2f2; /* רקע אדום בהיר מאוד */
+    color: #dc2626; /* טקסט אדום כהה קריא על לבן */
+    border: 1px solid #fca5a5; /* מסגרת אדומה עדינה */
+}
+
+.status-success { /* עיצוב הודעת הצלחה */
+    background-color: #f0fdf4; /* רקע ירוק בהיר מאוד */
+    color: #16a34a; /* טקסט ירוק כהה קריא על לבן */
+    border: 1px solid #86efac; /* מסגרת ירוקה עדינה */
+}
+
+/* הודעות שגיאה מתחת לשדות ועיצוב אימות */
+.field-error {
+    display: block;
+    color: #e53e3e;
+    font-size: 12px;
+    margin-top: 5px;
+    min-height: 16px;
+    font-weight: 500;
+    text-align: left;
+    direction: ltr;
+}
+
+.field-input.input-invalid {
+    border-color: #e53e3e !important;
+    box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.18) !important;
+}
+
+.field-input.input-valid {
+    border-color: #38a169 !important;
+    box-shadow: 0 0 0 3px rgba(56, 161, 105, 0.14) !important;
+}
+
+.pass-strength-wrap {
+    margin-top: 7px;
+    width: 100%;
+}
+
+.pass-strength-bar {
+    height: 5px;
+    border-radius: 4px;
+    background: #e2e8f0;
+    overflow: hidden;
+}
+
+.pass-strength-fill {
+    height: 100%;
+    border-radius: 4px;
+    width: 0%;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.pass-hint {
+    display: block;
+    font-size: 11px;
+    margin-top: 4px;
+    font-weight: 600;
+    text-align: left;
+    direction: ltr;
+}
+
+/* ========================================================================= */
+/* התאמה רספונסיבית למסכים צרים ומובייל */
+/* ========================================================================= */
+@media (max-width: 900px) { /* מסכים עד 900 פיקסלים */
+    html, body { /* גוף המסמך במובייל */
+        height: auto; /* ביטול גובה קבוע */
+        overflow-y: auto; /* אפשור גלילה במובייל בלבד */
+    }
+
+    .app-card { /* הפיכה לפריסה אנכית במובייל */
+        flex-direction: column; /* הצבה בטור */
+        height: auto; /* גובה מותאם */
+    }
+
+    .brand-side { /* צד המיתוג במובייל */
+        width: 100vw; /* רוחב מסך מלא */
+        flex: 0 0 auto; /* ביטול קיבוע */
+        height: 35vh; /* גובה מותאם */
+        border-right: none; /* ביטול קו הפרדה ימני */
+        border-bottom: 1px solid #e2e8f0; /* קו הפרדה תחתון */
+    }
+
+    .brand-logo-img { /* לוגו מותאם במובייל */
+        object-fit: contain; /* התאמה נקייה */
+    }
+
+    .login-side { /* צד הטפסים במובייל */
+        width: 100vw; /* רוחב מסך מלא */
+        flex: 0 0 auto; /* ביטול קיבוע */
+        height: auto; /* גובה מותאם */
+        padding: 30px 20px 40px 20px; /* ריווח מותאם */
+        overflow: visible; /* ללא הגבלת גובה */
+    }
+
+    .login-header, .login-form, .status-msg { /* רכיבי הטופס במובייל */
+        max-width: 100%; /* רוחב מלא במסך קטן */
+    }
+} /* סיום התאמה רספונסיבית */

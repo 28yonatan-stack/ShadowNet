@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShadowNet - אזור אישי</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="shadownet-shield-logo.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Heebo', sans-serif;
+        }
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+        .user-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            max-width: 520px;
+            width: 100%;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+        }
+        .user-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .user-brand img {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+        }
+        .user-brand h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .user-avatar-big {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 0 auto 1.25rem;
+            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.25);
+        }
+        .user-welcome-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.4rem;
+        }
+        .user-email-text {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            direction: ltr;
+        }
+        .user-info-box {
+            background-color: #f1f5f9;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            text-align: right;
+            margin-bottom: 2rem;
+            border: 1px solid #e2e8f0;
+        }
+        .user-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.4rem 0;
+            font-size: 0.9rem;
+        }
+        .user-info-row strong {
+            color: #0f172a;
+        }
+        .user-info-row span {
+            color: #64748b;
+        }
+        .status-badge-ok {
+            background-color: #ecfdf5;
+            color: #059669;
+            border: 1px solid #a7f3d0;
+            padding: 0.2rem 0.6rem;
+            border-radius: 14px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        .btn-user-logout {
+            width: 100%;
+            background-color: #fef2f2;
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            padding: 0.85rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .btn-user-logout:hover {
+            background-color: #ef4444;
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.25);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="user-card">
+        <div class="user-brand">
+            <img src="shadownet-shield-logo.png" alt="ShadowNet Logo">
+            <h1>ShadowNet</h1>
+        </div>
+
+        <div class="user-avatar-big" id="uAvatar">U</div>
+        <h2 class="user-welcome-title">שלום, <span id="uName">משתמש</span>!</h2>
+        <p class="user-email-text" id="uEmail">user@email.com</p>
+
+        <div class="user-info-box">
+            <div class="user-info-row">
+                <span>סטטוס חשבון:</span>
+                <span class="status-badge-ok"><i class="fa-solid fa-circle-check"></i> מחובר ומאומת</span>
+            </div>
+            <div class="user-info-row">
+                <span>סוג הרשאה:</span>
+                <strong>משתמש רגיל (Member)</strong>
+            </div>
+            <div class="user-info-row">
+                <span>אבטחה:</span>
+                <span>אימות מוגן ב-ShadowNet</span>
+            </div>
+        </div>
+
+        <button onclick="handleUserLogout()" class="btn-user-logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            התנתקות מהחשבון
+        </button>
+    </div>
+
+    <script>
+        const rawUser = sessionStorage.getItem("currentUser");
+        if (!rawUser) {
+            window.location.href = "login.html";
+        } else {
+            try {
+                const user = JSON.parse(rawUser);
+                const displayName = user.fullName || user.username || "משתמש";
+                document.getElementById("uName").innerText = displayName;
+                document.getElementById("uEmail").innerText = user.email || "";
+                document.getElementById("uAvatar").innerText = displayName.charAt(0).toUpperCase();
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        function handleUserLogout() {
+            sessionStorage.removeItem("currentUser");
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>

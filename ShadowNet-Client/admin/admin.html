@@ -1,0 +1,244 @@
+<!DOCTYPE html> <!-- הגדרת סוג המסמך כ-HTML5 תקני -->
+<html lang="he" dir="rtl"> <!-- הגדרת שפת הדף וכיוון כתיבה מימין לשמאל עבור הממשק -->
+<head> <!-- ראש הדף שמכיל הגדרות ומשאבים -->
+    <meta charset="UTF-8"> <!-- קידוד תווים רחב התומך בעברית ובאנגלית -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- התאמת התצוגה לכל המסכים -->
+    <title>ShadowNet - פאנל ניהול מאובטח</title> <!-- כותרת הלשונית בדפדפן - ShadowNet -->
+
+    <!-- פונטים מודרניים מגוגל -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ספריית האייקונים FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- אייקון הלשונית של ShadowNet -->
+    <link rel="icon" type="image/png" href="shadownet-shield-logo.png">
+    
+    <!-- קובץ העיצוב של פאנל הניהול -->
+    <link rel="stylesheet" href="admin.css?v=25">
+    <script src="admin.js?v=25" defer></script>
+</head>
+<body>
+
+    <!-- מעטפת הפריסה הראשית: סרגל צד ימני + תוכן ראשי משמאל -->
+    <div class="admin-layout">
+
+        <!-- ==============================================
+             סרגל ניווט צדדי ימני (Right Sidebar)
+             ============================================== -->
+        <aside class="admin-sidebar">
+
+            <!-- מיתוג עליון של המערכת -->
+            <div class="sidebar-brand">
+                <div class="brand-logo-box">
+                    <img src="shadownet-shield-logo.png" alt="ShadowNet Logo" class="brand-logo-img">
+                </div>
+                <div class="brand-text">
+                    <h1 class="brand-title">ShadowNet</h1>
+                    <span class="brand-badge">ADMIN CONSOLE</span>
+                </div>
+            </div>
+
+            <!-- פרופיל מנהל מחובר -->
+            <div class="admin-profile-card">
+                <div class="profile-avatar" id="adminAvatar">A</div>
+                <div class="profile-info">
+                    <div class="profile-name" id="adminFullName">מנהל מערכת</div>
+                    <div class="profile-email" id="adminEmailDisplay">admin@shadownet.com</div>
+                </div>
+                <span class="online-indicator" title="מחובר כעת"></span>
+            </div>
+
+            <!-- כותרת תפריט ניווט -->
+            <div class="sidebar-section-title">ניווט במערכת</div>
+
+            <!-- רשימת קישורי ניווט לבחירת דף -->
+            <nav class="sidebar-nav">
+                <!-- דף ניהול משתמשים (פעיל כעת) -->
+                <button class="nav-item active" onclick="switchView('users')" id="nav-users">
+                    <span class="nav-icon"><i class="fa-solid fa-users-gear"></i></span>
+                    <span class="nav-label">ניהול משתמשים</span>
+                    <span class="nav-pill" id="navUsersCount">0</span>
+                </button>
+
+                <!-- דף לוגים ואבטחה -->
+                <button class="nav-item" onclick="switchView('security')" id="nav-security">
+                    <span class="nav-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                    <span class="nav-label">יומן אבטחה ואימות</span>
+                </button>
+
+                <!-- מעבר לדף התחברות (אתר ראשי) -->
+                <a href="../login.html" class="nav-item external-link" title="מעבר לדף ההתחברות">
+                    <span class="nav-icon"><i class="fa-solid fa-arrow-right-to-bracket"></i></span>
+                    <span class="nav-label">דף התחברות (Login)</span>
+                    <span class="nav-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                </a>
+
+                <!-- מעבר לדף הרשמה -->
+                <a href="../signup.html" class="nav-item external-link" title="מעבר לדף הרשמת משתמשים">
+                    <span class="nav-icon"><i class="fa-solid fa-user-plus"></i></span>
+                    <span class="nav-label">דף הרשמה (Sign Up)</span>
+                    <span class="nav-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                </a>
+
+                <!-- מעבר לדף שכחתי סיסמה -->
+                <a href="../forgot-password.html" class="nav-item external-link" title="מעבר לדף איפוס סיסמה">
+                    <span class="nav-icon"><i class="fa-solid fa-key"></i></span>
+                    <span class="nav-label">שכחתי סיסמה (Reset)</span>
+                    <span class="nav-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                </a>
+            </nav>
+
+            <!-- אזור התנתקות תחתון (נעוץ בתחתית סרגל הצד) -->
+            <div class="sidebar-footer">
+                <button onclick="handleLogout()" class="btn-sidebar-logout" title="התנתק מיד מפאנל הניהול">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>התנתקות מהמערכת</span>
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- ==============================================
+             אזור התוכן הראשי בצד שמאל (Main Content)
+             ============================================== -->
+        <main class="admin-main">
+
+            <!-- סרגל עליון של אזור התוכן -->
+            <header class="top-bar">
+                <div class="top-bar-title">
+                    <h2 id="currentViewTitle">ברוך הבא yonatan rafailov</h2>
+                    <p class="top-bar-sub">פאנל ניהול ShadowNet &bull; ניטור משתמשים, סטטוס אימות נתונים והצפנות PostgreSQL</p>
+                </div>
+
+                <div class="top-bar-actions">
+                    <button class="btn-action-primary" onclick="fetchUsers()" title="רענן נתונים בזמן אמת">
+                        <i class="fa-solid fa-rotate-right" id="refreshIcon"></i>
+                        <span>רענן נתונים</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- כרטיסי סטטיסטיקות מפתח (KPIs) בעיצוב נקי -->
+            <section class="stats-row">
+
+                <!-- כרטיס 1: סה"כ משתמשים -->
+                <div class="kpi-card">
+                    <div class="kpi-icon-box blue">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="kpi-data">
+                        <span class="kpi-label">סה"כ משתמשים</span>
+                        <span class="kpi-number" id="totalUsersCount">0</span>
+                    </div>
+                </div>
+
+                <!-- כרטיס 2: משתמשים מחוברים -->
+                <div class="kpi-card">
+                    <div class="kpi-icon-box green">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <div class="kpi-data">
+                        <div class="kpi-label-flex">
+                            <span class="pulse-live"></span>
+                            <span class="kpi-label">משתמשים פעילים</span>
+                        </div>
+                        <span class="kpi-number" id="onlineUsersCount">0</span>
+                    </div>
+                </div>
+
+                <!-- כרטיס 3: סטטוס שרת ומסד נתונים -->
+                <div class="kpi-card">
+                    <div class="kpi-icon-box cyan">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <div class="kpi-data">
+                        <span class="kpi-label">מסד נתונים ShadowNet</span>
+                        <span class="kpi-status-text">PostgreSQL מחובר</span>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- תצוגה 1: טבלת המשתמשים (ברירת מחדל) -->
+            <section class="content-panel" id="view-users-panel">
+
+                <!-- סרגל כלי חיפוש וסינון מעל הטבלה -->
+                <div class="table-header-controls">
+                    <div class="search-input-group">
+                        <i class="fa-solid fa-magnifying-glass search-ico"></i>
+                        <input type="text" id="userSearch" placeholder="חיפוש מהיר לפי שם, אימייל, כינוי או מזהה ID...">
+                    </div>
+                    <div class="table-summary-info">
+                        נמצאו <strong id="shownUsersCount">0</strong> משתמשים
+                    </div>
+                </div>
+
+                <!-- מעטפת הטבלה (כיווניות LTR עבור נתוני אנגלית, אימיילים והאש) -->
+                <div class="table-wrapper" dir="ltr">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 60px;">ID</th>
+                                <th>User</th>
+                                <th>Email Address</th>
+                                <th>Email 2FA</th>
+                                <th>Status</th>
+                                <th>Password Hash (SHA-256)</th>
+                                <th>Registered</th>
+                                <th style="text-align: center; width: 90px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- השורות יוזרקו אוטומטית מקוד ה-JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+
+            <!-- תצוגה 2: יומן אבטחה ואימות (תצוגת מסך שניה לבחירה בסרגל) -->
+            <section class="content-panel" id="view-security-panel" style="display: none;">
+                <div class="security-intro-box">
+                    <div class="security-icon-big"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>יומן אבטחה, שליחת קודי אימות והגנות ShadowNet</h3>
+                    <p>כל ניסיונות האימות, איפוס הסיסמאות ושליחת קודי ה-OTP מתועדים ומאומתים בזמן אמת מול שרת ה-SMTP ומסד הנתונים PostgreSQL.</p>
+                </div>
+
+                <div class="security-cards-grid">
+                    <div class="sec-card">
+                        <div class="sec-card-header">
+                            <i class="fa-solid fa-envelope-circle-check"></i>
+                            <h4>שירות שליחת אימיילים (SMTP)</h4>
+                        </div>
+                        <div class="sec-card-body">
+                            <p><strong>שרת שולח:</strong> shadownet.security@gmail.com</p>
+                            <p><strong>פרוטוקול:</strong> TLS/SSL פורט 587</p>
+                            <p><strong>תוקף קוד OTP:</strong> 10 דקות</p>
+                            <div class="sec-badge ok"><i class="fa-solid fa-circle-check"></i> שירות פעיל</div>
+                        </div>
+                    </div>
+
+                    <div class="sec-card">
+                        <div class="sec-card-header">
+                            <i class="fa-solid fa-lock"></i>
+                            <h4>הצפנת סיסמאות</h4>
+                        </div>
+                        <div class="sec-card-body">
+                            <p><strong>אלגוריתם:</strong> SHA-256 Cryptographic Hash</p>
+                            <p><strong>אבטחת אימות:</strong> חד-כיווני, מניעת דליפות</p>
+                            <p><strong>סטטוס הצפנה:</strong> פעיל ומאובטח</p>
+                            <div class="sec-badge ok"><i class="fa-solid fa-circle-check"></i> 100% מוצפן</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+</html>
