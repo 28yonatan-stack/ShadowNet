@@ -1,0 +1,14 @@
+# .NET build artifacts
+**/bin/
+**/obj/
+
+# Visual Studio / VS Code caches
+.vs/
+.vscode/
+*.user
+*.suo
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
