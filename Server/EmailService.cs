@@ -46,12 +46,86 @@ public class EmailService
                 EnableSsl = true // חיבור מאובטח ומוצפן ב-SSL/TLS
             };
 
-            // 4. בניית תוכן הודעת הדוא"ל
+            // 4. בניית תוכן הודעת הדוא"ל המעוצבת בסגנון מיתוג ShadowNet
+            string htmlContent = $@"
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+<meta charset=""UTF-8"">
+<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+<title>ShadowNet Security Code</title>
+</head>
+<body style=""margin:0; padding:0; background-color:#030712; font-family:'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; color:#f8fafc;"">
+  <table role=""presentation"" width=""100%"" cellspacing=""0"" cellpadding=""0"" style=""background-color:#030712; padding:40px 15px;"">
+    <tr>
+      <td align=""center"">
+        <table role=""presentation"" width=""100%"" style=""max-width:520px; background-color:#0b1329; border:1px solid #1e293b; border-radius:16px; overflow:hidden; box-shadow:0 20px 40px rgba(0,0,0,0.6);"">
+          <!-- כותרת ראשית ומיתוג ShadowNet -->
+          <tr>
+            <td style=""background: linear-gradient(135deg, #070d1e 0%, #0c1a38 100%); padding:32px 30px; text-align:center; border-bottom:1px solid #1e3a5f;"">
+              <div style=""display:inline-block; padding:5px 12px; background:rgba(14,165,233,0.12); border:1px solid rgba(14,165,233,0.3); border-radius:20px; font-size:11px; font-weight:700; color:#38bdf8; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:12px;"">
+                SHADOWNET // SECURE DISPATCH
+              </div>
+              <h1 style=""margin:0; font-size:24px; font-weight:800; color:#ffffff; letter-spacing:0.5px;"">
+                Verification Passcode
+              </h1>
+              <p style=""margin:6px 0 0 0; font-size:13px; color:#94a3b8;"">
+                {action} Request
+              </p>
+            </td>
+          </tr>
+
+          <!-- גוף ההודעה -->
+          <tr>
+            <td style=""padding:32px 30px; text-align:center;"">
+              <p style=""margin:0 0 22px 0; font-size:14px; line-height:1.6; color:#cbd5e1;"">
+                Use the 6-digit one-time passcode below to verify your identity on <strong style=""color:#ffffff;"">ShadowNet</strong>:
+              </p>
+
+              <!-- תיבת קוד האימות המודגשת עם זוהר כחול -->
+              <table role=""presentation"" width=""100%"" cellspacing=""0"" cellpadding=""0"">
+                <tr>
+                  <td align=""center"">
+                    <div style=""display:inline-block; background-color:#020617; border:2px solid #0284c7; border-radius:12px; padding:18px 36px; box-shadow:0 0 25px rgba(2,132,199,0.35);"">
+                      <span style=""font-family:'Courier New', Consolas, monospace; font-size:36px; font-weight:900; letter-spacing:8px; color:#38bdf8; text-shadow:0 0 10px rgba(56,189,248,0.5);"">
+                        {otpCode}
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- התראת תוקף ואבטחה -->
+              <p style=""margin:22px 0 0 0; font-size:12px; color:#94a3b8; display:inline-block; padding:6px 14px; background:rgba(255,255,255,0.03); border-radius:6px; border:1px solid rgba(255,255,255,0.08);"">
+                ⏱ Valid for <strong style=""color:#f8fafc;"">10 minutes</strong>. Never share this code.
+              </p>
+            </td>
+          </tr>
+
+          <!-- תחתית ההודעה -->
+          <tr>
+            <td style=""background-color:#050a18; padding:20px 30px; text-align:center; border-top:1px solid #131e36; font-size:11px; color:#64748b; line-height:1.5;"">
+              <p style=""margin:0 0 4px 0;"">
+                Automated security dispatch from <strong style=""color:#94a3b8;"">ShadowNet Tactical Network</strong>.
+              </p>
+              <p style=""margin:0;"">
+                If you did not initiate this request, your account remains secure and no action is required.
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>";
+
             var mail = new MailMessage
             {
                 From = new MailAddress(senderEmail, "ShadowNet Security", Encoding.UTF8),
                 Subject = $"ShadowNet - {subject}",
-                Body = $"Hello,\n\nYour verification code for {action} is:\n\n    {otpCode}\n\nThis code is valid for 10 minutes.\nIf you did not request this, please ignore this email.",
+                Body = htmlContent,
+                IsBodyHtml = true,
                 BodyEncoding = Encoding.UTF8
             };
 
