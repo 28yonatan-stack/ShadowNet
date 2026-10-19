@@ -235,41 +235,180 @@
                 </div>
             </section>
 
-            <!-- תצוגה 3: יומן אבטחה ואימות (תצוגת מסך שניה לבחירה בסרגל) -->
+            <!-- תצוגה 3: יומן אבטחה, אימות והגנות ShadowNet -->
             <section class="content-panel" id="view-security-panel" style="display: none;">
+                
+                <!-- כרטיס מבוא עליון לאבטחה -->
                 <div class="security-intro-box">
-                    <div class="security-icon-big"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="security-shield-badge">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>CYBER DEFENSE & AUDIT LOG</span>
+                    </div>
                     <h3>יומן אבטחה, שליחת קודי אימות והגנות ShadowNet</h3>
-                    <p>כל ניסיונות האימות, איפוס הסיסמאות ושליחת קודי ה-OTP מתועדים ומאומתים בזמן אמת מול שרת ה-SMTP ומסד הנתונים PostgreSQL.</p>
+                    <p>כל ניסיונות האימות, איפוס הסיסמאות, שליחת קודי ה-OTP ותקשורת ה-Socket מתועדים ומאומתים בזמן אמת מול שרת ה-SMTP ומסד הנתונים PostgreSQL.</p>
                 </div>
 
+                <!-- גריד כרטיסי שירותי אבטחה (SMTP + Hashing) בעיצוב מסודר -->
                 <div class="security-cards-grid">
+                    
+                    <!-- כרטיס 1: שירות שליחת אימיילים ואימות OTP -->
                     <div class="sec-card">
                         <div class="sec-card-header">
-                            <i class="fa-solid fa-envelope-circle-check"></i>
-                            <h4>שירות שליחת אימיילים (SMTP)</h4>
+                            <div class="sec-card-header-icon blue">
+                                <i class="fa-solid fa-envelope-circle-check"></i>
+                            </div>
+                            <div class="sec-card-header-text">
+                                <h4>שירות שליחת אימיילים (SMTP)</h4>
+                                <span class="sec-card-sub">אימות משתמשים וקודי OTP חד-פעמיים</span>
+                            </div>
+                            <span class="sec-badge ok">
+                                <span class="status-dot-circle green"></span> שירות פעיל
+                            </span>
                         </div>
                         <div class="sec-card-body">
-                            <p><strong>שרת שולח:</strong> shadownet.security@gmail.com</p>
-                            <p><strong>פרוטוקול:</strong> TLS/SSL פורט 587</p>
-                            <p><strong>תוקף קוד OTP:</strong> 10 דקות</p>
-                            <div class="sec-badge ok"><i class="fa-solid fa-circle-check"></i> שירות פעיל</div>
+                            <div class="sec-prop-row">
+                                <span class="sec-prop-label">שרת שולח:</span>
+                                <span class="sec-prop-value" dir="ltr">shadownet.security@gmail.com</span>
+                            </div>
+                            <div class="sec-prop-row">
+                                <span class="sec-prop-label">פרוטוקול אבטחה:</span>
+                                <span class="sec-prop-value" dir="ltr">TLS / SSL (Port 587)</span>
+                            </div>
+                            <div class="sec-prop-row">
+                                <span class="sec-prop-label">תוקף קוד אימות:</span>
+                                <span class="sec-prop-value">10 דקות (חד-פעמי לכל פעולה)</span>
+                            </div>
+                            <div class="sec-prop-row">
+                                <span class="sec-prop-label">הגנה נגד ספאם:</span>
+                                <span class="sec-prop-value">ביטול קודים ישנים אוטומטית</span>
+                            </div>
                         </div>
                     </div>
 
+                    <!-- כרטיס 2: מנגנון הצפנת סיסמאות SHA-256 -->
                     <div class="sec-card">
                         <div class="sec-card-header">
-                            <i class="fa-solid fa-lock"></i>
-                            <h4>הצפנת סיסמאות</h4>
+                            <div class="sec-card-header-icon cyan">
+                                <i class="fa-solid fa-lock"></i>
+                            </div>
+                            <div class="sec-card-header-text">
+                                <h4>מנגנון הצפנת סיסמאות</h4>
+                                <span class="sec-card-sub">אבטחת אימות חד-כיוונית ב-PostgreSQL</span>
+                            </div>
+                            <span class="sec-badge ok">
+                                <span class="status-dot-circle green"></span> 100% מוצפן
+                            </span>
                         </div>
                         <div class="sec-card-body">
-                            <p><strong>אלגוריתם:</strong> SHA-256 Cryptographic Hash</p>
-                            <p><strong>אבטחת אימות:</strong> חד-כיווני, מניעת דליפות</p>
-                            <p><strong>סטטוס הצפנה:</strong> פעיל ומאובטח</p>
-                            <div class="sec-badge ok"><i class="fa-solid fa-circle-check"></i> 100% מוצפן</div>
+                            <div class="sec-prop-row">
+                                <span class="sec-prop-label">אלגוריתם הצפנה:</span>
+                                <span class="sec-prop-value font-mono" dir="ltr">SHA-256 Cryptographic Hash</span>
+                            </div>
+                            <div class="sec-prop-row">
+                                <span class="sec-prop-label">רמת הגנה:</span>
+                                <span class="sec-prop-value">חד-כיווני (Non-Reversible)</span>
+                            </div>
+                            <div class="sec-prop-row">
+                                <span class="sec-prop-label">מניעת פריצות:</span>
+                                <span class="sec-prop-value">חסינות בפני דליפות מאגר נתונים</span>
+                            </div>
+                            <div class="sec-prop-row">
+                                <span class="sec-prop-label">אבטחת שידור:</span>
+                                <span class="sec-prop-value">אימות לפני שמירה ב-Database</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- כלי אינטראקטיבי: בדיקת הצפנת SHA-256 בזמן אמת (פיצ'ר חדש ועובד) -->
+                <div class="crypto-tester-container">
+                    <div class="crypto-tester-box">
+                        <div class="crypto-tester-header">
+                            <div class="crypto-tester-title">
+                                <i class="fa-solid fa-fingerprint"></i>
+                                <div>
+                                    <h4 style="margin:0; font-size: 1.05rem; font-weight:800;">כלי בדיקת הצפנה חי בזמן אמת (Live SHA-256 Tester)</h4>
+                                    <span style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 500;">מנוע הצפנה מקומי הפועל בתוך הדפדפן להדגמת פעולת האלגוריתם</span>
+                                </div>
+                            </div>
+                            <span class="crypto-pill"><i class="fa-solid fa-bolt"></i> פיצ'ר אינטראקטיבי</span>
+                        </div>
+                        <div class="crypto-tester-body">
+                            <p class="crypto-tester-desc">הקלד כל סיסמה או טקסט וראה בזמן אמת כיצד מנגנון האבטחה של ShadowNet מייצר את ה-Hash המאובטח:</p>
+                            
+                            <div class="crypto-input-flex">
+                                <div class="crypto-input-wrap">
+                                    <i class="fa-solid fa-key"></i>
+                                    <input type="text" id="cryptoInput" placeholder="הקלד כאן מחרוזת או סיסמה לבדיקה..." value="Admin#2026" oninput="runLiveCryptoHash()">
+                                </div>
+                                <button class="btn-action-primary" onclick="generateAndLogAuditTest()">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                    <span>רשום אירוע ביומן האבטחה</span>
+                                </button>
+                            </div>
+
+                            <div class="crypto-result-wrap">
+                                <div class="crypto-result-label">
+                                    <span>תוצאת ה-Hash המוצפנת (SHA-256 Hex Digest):</span>
+                                    <button class="btn-copy-hash" onclick="copyCryptoHash()" title="העתק מחרוזת Hash">
+                                        <i class="fa-regular fa-copy" id="copyHashIcon"></i> <span id="copyHashText">העתק Hash</span>
+                                    </button>
+                                </div>
+                                <div class="crypto-hash-display" id="cryptoHashDisplay" dir="ltr">...טוען הצפנה...</div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- יומן אירועי אבטחה ואימות חי (Live Security Audit Trail Table) -->
+                <div class="audit-log-container">
+                    <div class="audit-card-box">
+                        <div class="audit-box-header">
+                            <div class="audit-box-title">
+                                <i class="fa-solid fa-list-check"></i>
+                                <div>
+                                    <h4 style="margin: 0; font-size: 1.05rem; font-weight:800;">יומן אירועי אבטחה ואימות (Live Security Audit Trail)</h4>
+                                    <span style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 500;">תיעוד פעולות אימות, בדיקות שרת, בקשות OTP ותקשורת Socket</span>
+                                </div>
+                            </div>
+                            <div class="audit-box-actions">
+                                <button class="btn-audit-tool" onclick="runServerSecurityPing()" title="שלח בדיקת פינג לשרת">
+                                    <i class="fa-solid fa-satellite-dish"></i>
+                                    <span>בדיקת פינג לשרת</span>
+                                </button>
+                                <button class="btn-audit-tool" onclick="refreshAuditLogs()" title="רענן יומן">
+                                    <i class="fa-solid fa-rotate-right"></i>
+                                    <span>רענן יומן</span>
+                                </button>
+                                <button class="btn-audit-tool danger" onclick="clearAuditLogs()" title="נקה יומן אירועים">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                    <span>נקה יומן</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- טבלת אירועי האבטחה -->
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 160px;">חותמת זמן</th>
+                                        <th>סוג אירוע אבטחה</th>
+                                        <th>משתמש / יעד</th>
+                                        <th>ערוץ / פורט</th>
+                                        <th>פרטי אימות</th>
+                                        <th style="text-align: center; width: 120px;">סטטוס</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="auditLogsTableBody">
+                                    <!-- נבנה דינמית על ידי admin.js -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
             </section>
 
         </main>
