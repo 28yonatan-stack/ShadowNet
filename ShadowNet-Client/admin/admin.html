@@ -63,32 +63,17 @@
                     <span class="nav-pill" id="navUsersCount">0</span>
                 </button>
 
+                <!-- דף סטטוס שרת ותקשורת Socket -->
+                <button class="nav-item" onclick="switchView('status')" id="nav-status">
+                    <span class="nav-icon"><i class="fa-solid fa-network-wired"></i></span>
+                    <span class="nav-label">סטטוס שרת (Socket)</span>
+                </button>
+
                 <!-- דף לוגים ואבטחה -->
                 <button class="nav-item" onclick="switchView('security')" id="nav-security">
                     <span class="nav-icon"><i class="fa-solid fa-shield-halved"></i></span>
                     <span class="nav-label">יומן אבטחה ואימות</span>
                 </button>
-
-                <!-- מעבר לדף התחברות (אתר ראשי) -->
-                <a href="../login.html" class="nav-item external-link" title="מעבר לדף ההתחברות">
-                    <span class="nav-icon"><i class="fa-solid fa-arrow-right-to-bracket"></i></span>
-                    <span class="nav-label">דף התחברות (Login)</span>
-                    <span class="nav-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
-                </a>
-
-                <!-- מעבר לדף הרשמה -->
-                <a href="../signup.html" class="nav-item external-link" title="מעבר לדף הרשמת משתמשים">
-                    <span class="nav-icon"><i class="fa-solid fa-user-plus"></i></span>
-                    <span class="nav-label">דף הרשמה (Sign Up)</span>
-                    <span class="nav-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
-                </a>
-
-                <!-- מעבר לדף שכחתי סיסמה -->
-                <a href="../forgot-password.html" class="nav-item external-link" title="מעבר לדף איפוס סיסמה">
-                    <span class="nav-icon"><i class="fa-solid fa-key"></i></span>
-                    <span class="nav-label">שכחתי סיסמה (Reset)</span>
-                    <span class="nav-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
-                </a>
             </nav>
 
             <!-- אזור התנתקות תחתון (נעוץ בתחתית סרגל הצד) -->
@@ -199,7 +184,58 @@
 
             </section>
 
-            <!-- תצוגה 2: יומן אבטחה ואימות (תצוגת מסך שניה לבחירה בסרגל) -->
+            <!-- תצוגה 2: סטטוס שרת ותקשורת (Socket Infrastructure) -->
+            <section class="content-panel" id="view-status-panel" style="display: none;">
+                <div class="system-status-container">
+                    <div class="status-card-box">
+                        <div class="status-box-header">
+                            <div class="status-box-title">
+                                <i class="fa-solid fa-server"></i>
+                                <span>סטטוס שרת ותשתיות תקשורת (System Infrastructure)</span>
+                            </div>
+                            <span class="live-pill"><span class="pulse-dot"></span> LIVE MONITOR</span>
+                        </div>
+
+                        <div class="status-rows-list">
+                            <!-- שורה 1: סטטוס שרת Socket -->
+                            <div class="status-item-row">
+                                <span class="status-item-label">סטטוס שרת (Socket)</span>
+                                <span class="status-item-value" id="socketStatusDisplay">
+                                    <span class="status-dot-circle green"></span> מחובר ותקין
+                                </span>
+                            </div>
+
+                            <!-- שורה 2: פרוטוקול תקשורת -->
+                            <div class="status-item-row">
+                                <span class="status-item-label">פרוטוקול תקשורת</span>
+                                <span class="status-item-value font-mono">WebSocket (TCP) / TCP Socket</span>
+                            </div>
+
+                            <!-- שורה 3: סוג מסד נתונים -->
+                            <div class="status-item-row">
+                                <span class="status-item-label">סוג מסד נתונים</span>
+                                <span class="status-item-value font-mono">PostgreSQL</span>
+                            </div>
+
+                            <!-- שורה 4: מצב מסד נתונים -->
+                            <div class="status-item-row">
+                                <span class="status-item-label">מצב מסד נתונים</span>
+                                <span class="status-item-value" id="dbStatusDisplay">
+                                    <span class="status-dot-circle green"></span> מחובר ותקין
+                                </span>
+                            </div>
+
+                            <!-- שורה 5: פורט האזנה -->
+                            <div class="status-item-row">
+                                <span class="status-item-label">פורט האזנה</span>
+                                <span class="status-item-value font-mono font-bold">5057</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- תצוגה 3: יומן אבטחה ואימות (תצוגת מסך שניה לבחירה בסרגל) -->
             <section class="content-panel" id="view-security-panel" style="display: none;">
                 <div class="security-intro-box">
                     <div class="security-icon-big"><i class="fa-solid fa-shield-halved"></i></div>

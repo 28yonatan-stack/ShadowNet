@@ -793,6 +793,144 @@ body {
 }
 
 /* ==========================================================================
+   כרטיס סטטוס שרת ותקשורת (Socket System Status - תואם תמונה)
+   ========================================================================== */
+.system-status-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.status-card-box {
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    border-radius: 14px;
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+}
+
+.status-box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.75rem;
+    background: #f8fafc;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.status-box-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.status-box-title i {
+    color: var(--brand-blue);
+    font-size: 1.2rem;
+}
+
+.live-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #ecfdf5;
+    color: #059669;
+    border: 1px solid #a7f3d0;
+    padding: 0.25rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #10b981;
+    border-radius: 50%;
+    animation: livePulse 2s infinite ease-in-out;
+}
+
+@keyframes livePulse {
+    0% { transform: scale(0.9); opacity: 0.8; }
+    50% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+.status-rows-list {
+    padding: 0.5rem 1.75rem;
+}
+
+.status-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 0.5rem;
+    border-bottom: 1px solid #f1f5f9;
+    transition: background-color 0.15s ease;
+}
+
+.status-item-row:last-child {
+    border-bottom: none;
+}
+
+.status-item-row:hover {
+    background-color: #f8fafc;
+}
+
+.status-item-label {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #475569;
+}
+
+.status-item-value {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    direction: ltr;
+}
+
+.status-item-value.font-mono {
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    letter-spacing: 0.2px;
+}
+
+.status-item-value.font-bold {
+    font-weight: 800;
+}
+
+.status-dot-circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-dot-circle.green {
+    background-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.status-dot-circle.red {
+    background-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+.status-item-value.text-red {
+    color: #dc2626;
+}
+
+.status-item-value.text-green {
+    color: #16a34a;
+}
+
+/* ==========================================================================
    התאמה רספונסיבית (Mobile / Tablet)
    ========================================================================== */
 @media (max-width: 960px) {

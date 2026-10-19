@@ -49,25 +49,38 @@ function checkAdminAccessAndLoadProfile() {
 }
 
 /**
- * 2. מעבר בין לשוניות בסרגל הצד (משתמשים / יומן אבטחה)
+ * 2. מעבר בין לשוניות בסרגל הצד (משתמשים / סטטוס שרת / יומן אבטחה)
  */
 function switchView(viewName) {
     const usersPanel = document.getElementById("view-users-panel"); // פאנל משתמשים
     const securityPanel = document.getElementById("view-security-panel"); // פאנל יומן אבטחה
+    const statusPanel = document.getElementById("view-status-panel"); // פאנל סטטוס שרת ותשתיות תקשורת
     const navUsers = document.getElementById("nav-users"); // כפתור משתמשים
     const navSecurity = document.getElementById("nav-security"); // כפתור יומן אבטחה
+    const navStatus = document.getElementById("nav-status"); // כפתור סטטוס שרת
     const viewTitle = document.getElementById("currentViewTitle"); // כותרת עליונה
+
+    // איפוס תצוגת כל הפאנלים
+    if (usersPanel) usersPanel.style.display = 'none';
+    if (securityPanel) securityPanel.style.display = 'none';
+    if (statusPanel) statusPanel.style.display = 'none';
+
+    // איפוס הדגשת הכפתורים
+    if (navUsers) navUsers.classList.remove('active');
+    if (navSecurity) navSecurity.classList.remove('active');
+    if (navStatus) navStatus.classList.remove('active');
 
     if (viewName === 'users') {
         if (usersPanel) usersPanel.style.display = 'block'; // הצגת פאנל משתמשים
-        if (securityPanel) securityPanel.style.display = 'none'; // הסתרת יומן
         if (navUsers) navUsers.classList.add('active'); // סימון כפתור כפעיל
-        if (navSecurity) navSecurity.classList.remove('active');
         if (viewTitle) viewTitle.innerText = 'ברוך הבא yonatan rafailov'; // כותרת משתמשים
+    } else if (viewName === 'status') {
+        if (statusPanel) statusPanel.style.display = 'block'; // הצגת פאנל סטטוס שרת
+        if (navStatus) navStatus.classList.add('active'); // סימון כפתור כפעיל
+        if (viewTitle) viewTitle.innerText = 'סטטוס שרת ותשתיות תקשורת (Socket)'; // כותרת סטטוס
+        checkSystemStatus(); // בדיקת מצב שרת עדכנית
     } else if (viewName === 'security') {
-        if (usersPanel) usersPanel.style.display = 'none'; // הסתרת פאנל משתמשים
         if (securityPanel) securityPanel.style.display = 'block'; // הצגת יומן
-        if (navUsers) navUsers.classList.remove('active');
         if (navSecurity) navSecurity.classList.add('active'); // סימון כפתור כפעיל
         if (viewTitle) viewTitle.innerText = 'יומן אבטחה ואימות'; // כותרת יומן
     }
@@ -248,7 +261,38 @@ async function deleteUser(userId) {
 }
 
 /**
- * 9. התנתקות מסודרת מפאנל הניהול
+ * 9. בדיקת סטטוס שרת (Socket) ומסד נתונים בזמן אמת
+ */
+async function checkSystemStatus() {
+    const socketStatusDisplay = document.getElementById("socketStatusDisplay");
+    const dbStatusDisplay = document.getElementById("dbStatusDisplay");
+
+    try {
+        const response = await fetch(`${API_BASE}/api/health`, { method: 'GET' });
+        if (response.ok) {
+            // השרת ומסד הנתונים מחוברים ותקינים
+            if (socketStatusDisplay) {
+                socketStatusDisplay.innerHTML = '<span class="status-dot-circle green"></span> מחובר ותקין';
+            }
+            if (dbStatusDisplay) {
+                dbStatusDisplay.innerHTML = '<span class="status-dot-circle green"></span> מחובר ותקין';
+            }
+        } else {
+            throw new Error("Server response not ok");
+        }
+    } catch (err) {
+        // במקרה של חוסר תקשורת או שרת לא מופעל
+        if (socketStatusDisplay) {
+            socketStatusDisplay.innerHTML = '<span class="status-dot-circle red"></span> השרת מנותק';
+        }
+        if (dbStatusDisplay) {
+            dbStatusDisplay.innerHTML = '<span class="status-dot-circle red"></span> מנותק';
+        }
+    }
+}
+
+/**
+ * 10. התנתקות מסודרת מפאנל הניהול
  */
 function handleLogout() {
     sessionStorage.removeItem("currentUser"); // מחיקת הסשן
@@ -256,12 +300,13 @@ function handleLogout() {
 }
 
 /**
- * 10. הפעלה בעת טעינת הדף
+ * 11. הפעלה בעת טעינת הדף
  */
 document.addEventListener('DOMContentLoaded', () => {
     const isAllowed = checkAdminAccessAndLoadProfile(); // בדיקת הרשאה
     if (isAllowed) {
         setupSearch(); // הפעלת תיבת החיפוש
         fetchUsers(); // שליפת הנתונים
+        checkSystemStatus(); // בדיקת סטטוס תשתיות תקשורת ומסד נתונים
     }
 });
