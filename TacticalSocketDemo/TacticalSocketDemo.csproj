@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <!-- חתימה דיגיטלית אוטומטית למניעת חסימות ווינדוס -->
+  <Target Name="AutoSignOutput" AfterTargets="AfterBuild">
+    <Exec Command="powershell -NoProfile -Command &quot;$c = Get-ChildItem -Path Cert:\CurrentUser\My | Where-Object { $_.Subject -like '*ShadowNetLocalDev*' } | Select-Object -First 1; if ($c) { Set-AuthenticodeSignature -FilePath '$(TargetPath)' -Certificate $c -ErrorAction SilentlyContinue; $exe = [System.IO.Path]::ChangeExtension('$(TargetPath)', '.exe'); if (Test-Path $exe) { Set-AuthenticodeSignature -FilePath $exe -Certificate $c -ErrorAction SilentlyContinue } }&quot;" ContinueOnError="true" />
+  </Target>
+
+</Project>
