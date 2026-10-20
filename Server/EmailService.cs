@@ -28,7 +28,11 @@ public class EmailService
         int port = int.TryParse(smtp["Port"], out int p) ? p : 587;
         string senderEmail = smtp["SenderEmail"] ?? "shadownet.security@gmail.com";
         string username = smtp["Username"] ?? "";
-        string password = smtp["Password"] ?? "";
+        // קריאת סיסמת ה-SMTP בצורה מאובטחת ממשתנה סביבה (ללא חשיפה בקוד)
+        string password = Environment.GetEnvironmentVariable("SHADOWNET_SMTP_PASSWORD") 
+                       ?? Environment.GetEnvironmentVariable("SMTP_PASSWORD") 
+                       ?? smtp["Password"] 
+                       ?? "";
 
         // 2. אם לא הוגדרו שם משתמש וסיסמה, לא נכשיל את הפעולה
         if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))

@@ -11,6 +11,8 @@
     <AssemblyName>ShadowNet.Server</AssemblyName>
     <!-- שם הפרויקט המלא בריצה -->
     <RootNamespace>ShadowNet.Server</RootNamespace>
+    <!-- ביטול יצירת קובץ exe מקומי לא חתום כדי לעבוד ישירות דרך dotnet.exe הרשמי של מיקרוסופט -->
+    <UseAppHost>false</UseAppHost>
   </PropertyGroup>
 
   <ItemGroup>

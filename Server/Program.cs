@@ -29,8 +29,15 @@ public class Program
             });
         });
 
-        // 4. קריאת מחרוזת החיבור למסד הנתונים מתוך appsettings.json
+        // 4. קריאת מחרוזת החיבור למסד הנתונים בצורה מאובטחת ללא חשיפת סיסמאות בקוד
         string connectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
+        string? envDbPassword = Environment.GetEnvironmentVariable("SHADOWNET_DB_PASSWORD") 
+                             ?? Environment.GetEnvironmentVariable("DB_PASSWORD");
+
+        if (!string.IsNullOrWhiteSpace(envDbPassword) && !connectionString.Contains("Password=", StringComparison.OrdinalIgnoreCase))
+        {
+            connectionString = $"{connectionString.TrimEnd(';')};Password={envDbPassword}";
+        }
 
         // 5. בניית האפליקציה (יצירת אובייקט השרת)
         var app = builder.Build();
