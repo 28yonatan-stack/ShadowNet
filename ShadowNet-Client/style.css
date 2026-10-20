@@ -337,6 +337,18 @@ body { /* עיצוב גוף המסמך הראשי */
     transform: none; /* ללא הרמה */
 }
 
+/* מצב הצלחה זוהר - כפתור נשאר ירוק ועשיר גם כשהוא מושבת בזמן הניתוב */
+.submit-btn.btn-success,
+.submit-btn.btn-success:disabled {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    border: none !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4) !important;
+    cursor: default;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
 /* ========================================================================= */
 /* שלב אימות קוד דוא"ל (Email OTP) - מעוצב נקי ואלגנטי כמו דף התחברות רגיל */
 /* ========================================================================= */
@@ -550,54 +562,62 @@ body { /* עיצוב גוף המסמך הראשי */
 .status-msg { /* הודעת משוב מעוצבת בסגנון מערכות סייבר מקצועיות */
     width: 100%;
     max-width: 380px;
-    margin-bottom: 16px;
-    padding: 11px 16px;
-    border-radius: 6px;
+    margin-bottom: 18px;
+    padding: 12px 16px;
+    border-radius: 8px;
     font-size: 13px;
+    font-weight: 600;
     line-height: 1.5;
     text-align: left;
     direction: ltr;
     unicode-bidi: plaintext;
     word-break: break-word;
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+    animation: fadeInStatus 0.25s ease-out;
 }
 
-.status-error { /* עיצוב הודעת שגיאה מקצועית */
+@keyframes fadeInStatus {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.status-error { /* עיצוב הודעת שגיאה מקצועית נקייה */
     background-color: #fef2f2;
     color: #991b1b;
-    border: 1px solid #fee2e2;
-    border-left: 3px solid #dc2626;
-    font-weight: 500;
+    border: 1px solid #fecaca;
+    border-left: 4px solid #ef4444;
 }
 
-.status-success { /* עיצוב הודעת הצלחה נקייה עם פס ירוק עדין */
+.status-success { /* עיצוב הודעת הצלחה נקייה ויוקרתית */
     background-color: #f0fdf4;
     color: #166534;
-    border: 1px solid #dcfce7;
-    border-left: 3px solid #16a34a;
-    font-weight: 500;
+    border: 1px solid #bbf7d0;
+    border-left: 4px solid #10b981;
 }
 
 /* הודעות שגיאה מתחת לשדות ועיצוב אימות */
 .field-error {
     display: block;
-    color: #e53e3e;
+    color: #ef4444;
     font-size: 12px;
     margin-top: 5px;
     min-height: 16px;
     font-weight: 500;
     text-align: left;
     direction: ltr;
+    transition: all 0.2s ease;
 }
 
 .field-input.input-invalid {
-    border-color: #e53e3e !important;
-    box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.18) !important;
+    border-color: #ef4444 !important;
+    background-color: #fffafb !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12) !important;
 }
 
 .field-input.input-valid {
-    border-color: #38a169 !important;
-    box-shadow: 0 0 0 3px rgba(56, 161, 105, 0.14) !important;
+    border-color: #10b981 !important;
+    background-color: #fbfdfc !important;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12) !important;
 }
 
 .pass-strength-wrap {

@@ -192,7 +192,17 @@
                 const data = await response.json(); // פענוח תשובה
 
                 if (response.ok && data.success) {
-                    showMessage("✓ " + (data.message || "Logged in successfully!"), false);
+                    // ניקוי כל הודעות שגיאה מהשדות וסימון ירוק נקי
+                    const emailEl = document.getElementById("user-email");
+                    const passEl = document.getElementById("user-password");
+                    const emailErr = document.getElementById("login-email-error");
+                    const passErr = document.getElementById("login-password-error");
+                    clearField(emailEl, emailErr);
+                    clearField(passEl, passErr);
+                    if (emailEl) emailEl.classList.add('input-valid');
+                    if (passEl) passEl.classList.add('input-valid');
+
+                    showMessage("✓ " + (data.message || "Logged in successfully to ShadowNet!"), false);
 
                     // שמירת פרטי המשתמש בסשן
                     sessionStorage.setItem("currentUser", JSON.stringify({
@@ -205,7 +215,8 @@
 
                     // בדיקה האם זה מנהל המערכת (28yonatan@gmail.com)
                     const isAdmin = (data.email || '').toLowerCase().trim() === '28yonatan@gmail.com';
-                    btn.innerText = "✓ Success!";
+                    btn.classList.add('btn-success');
+                    btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Success! Redirecting...';
                     
                     // הפניה לדף המתאים
                     setTimeout(() => {
@@ -217,12 +228,14 @@
                     }, 500);
                     return false;
                 } else {
+                    btn.classList.remove('btn-success');
                     showMessage("✗ " + (data.message || "Invalid email or password"), true);
                     btn.disabled = false;
                     btn.innerText = "Login to Account";
                 }
             } catch (err) {
                 console.error(err);
+                btn.classList.remove('btn-success');
                 showMessage("✗ Connection error with ShadowNet server: " + err.message, true);
                 btn.disabled = false;
                 btn.innerText = "Login to Account";
