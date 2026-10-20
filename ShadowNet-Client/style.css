@@ -1,3 +1,15 @@
+:root {
+    /* צבעי המותג המדויקים מלוגו המגן של ShadowNet */
+    --logo-blue: #0070f3; /* כחול רויאל חשמלי של המגן */
+    --logo-blue-deep: #0056cc; /* כחול עמוק להרחפה */
+    --logo-cyan: #00c6ff; /* תכלת / ציאן ניאון בוהק מהלוגו */
+    --logo-cyan-glow: #38bdf8; /* תכלת שמיים בוהק */
+    --logo-gradient: linear-gradient(135deg, #0066ff 0%, #00c6ff 100%); /* גרדיאנט המגן וה-S */
+    --logo-gradient-hover: linear-gradient(135deg, #0052d4 0%, #0099ff 100%);
+    --logo-shadow: 0 4px 16px rgba(0, 114, 255, 0.35);
+    --logo-shadow-hover: 0 6px 22px rgba(0, 114, 255, 0.5);
+}
+
 * { /* איפוס כללי לכל הרכיבים בדף */
     box-sizing: border-box; /* הכללת מסגרות ושוליים בחישוב גודל הרכיב */
     margin: 0; /* איפוס שוליים חיצוניים */
@@ -113,6 +125,13 @@ body { /* עיצוב גוף המסמך הראשי */
     margin-bottom: 8px; /* מרווח תחתון עדין */
 }
 
+.brand-net { /* מיתוג סיומת Net בצבעי הלוגו */
+    background: var(--logo-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
 .login-subtitle { /* תת כותרת מדויקת עם ניגודיות מעולה */
     font-size: 13.5px; /* גודל טקסט קריא ונעים */
     color: #64748b; /* אפור אלגנטי ומדויק */
@@ -121,14 +140,14 @@ body { /* עיצוב גוף המסמך הראשי */
 }
 
 .signup-link { /* קישור מעבר בין הדפים */
-    color: #0284c7; /* צבע כחול מותאם בדיוק ללוגו */
+    color: var(--logo-blue); /* צבע כחול מותאם בדיוק ללוגו */
     font-weight: 700; /* עובי מודגש */
     text-decoration: none; /* ללא קו תחתון */
     transition: color 0.2s ease; /* מעבר חלק */
 }
 
 .signup-link:hover { /* מעבר עכבר על הקישור */
-    color: #0ea5e9; /* גוון תכלת בהיר יותר */
+    color: var(--logo-cyan); /* גוון תכלת בהיר יותר */
     text-decoration: underline; /* קו תחתון בריחוף */
 }
 
@@ -147,7 +166,7 @@ body { /* עיצוב גוף המסמך הראשי */
     display: block; /* שורה נפרדת */
     font-size: 11px; /* גודל טקסט עדין ומדויק */
     font-weight: 700; /* עובי מודגש */
-    color: #0284c7; /* צבע כחול הלוגו */
+    color: var(--logo-blue); /* צבע כחול הלוגו */
     margin-bottom: 6px; /* מרווח מהשדה */
     text-transform: uppercase; /* אותיות גדולות באנגלית */
     letter-spacing: 0.8px; /* רווח אותיות יוקרתי */
@@ -200,9 +219,9 @@ body { /* עיצוב גוף המסמך הראשי */
 }
 
 .field-input:focus { /* בעת פוקוס והקלדה בשדה */
-    border-color: #0284c7; /* מסגרת כחולה בוהקת בצבע הלוגו */
+    border-color: var(--logo-blue); /* מסגרת כחולה בוהקת בצבע הלוגו */
     background-color: #ffffff; /* רקע לבן צח בפוקוס */
-    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15); /* הילה כחולה עדינה */
+    box-shadow: 0 0 0 3px rgba(0, 114, 255, 0.18); /* הילה כחולה עדינה */
 }
 
 .eye-btn { /* כפתור הצגה והסתרת סיסמה - כפתור לחיץ נקי ומדויק */
@@ -211,7 +230,7 @@ body { /* עיצוב גוף המסמך הראשי */
     top: 50%; /* מרכוז אנכי מדויק */
     transform: translateY(-50%); /* קיזוז אנכי */
     cursor: pointer; /* סמן לחיצה */
-    color: #0284c7; /* צבע כחול הלוגו של ShadowNet */
+    color: var(--logo-blue); /* צבע כחול הלוגו של ShadowNet */
     padding: 6px; /* שטח לחיצה נוח */
     z-index: 25; /* שכבה עליונה מעל שדה הקלט */
     pointer-events: auto; /* מאפשר לחיצה ישירה */
@@ -228,8 +247,8 @@ body { /* עיצוב גוף המסמך הראשי */
 }
 
 .eye-btn:hover { /* בריחוף מעל כפתור העין */
-    color: #0284c7; /* כחול הלוגו */
-    background-color: rgba(2, 132, 199, 0.1); /* רקע תכלת שקוף עדין */
+    color: var(--logo-cyan); /* כחול הלוגו */
+    background-color: rgba(0, 114, 255, 0.08); /* רקע תכלת שקוף עדין */
 }
 
 .eye-svg { /* עיצוב אייקון ה-SVG הפנימי של העין */
@@ -251,14 +270,14 @@ body { /* עיצוב גוף המסמך הראשי */
 }
 
 .forgot-link { /* קישור לשכחתי סיסמה */
-    color: #0284c7; /* צבע כחול הלוגו */
+    color: var(--logo-blue); /* צבע כחול הלוגו */
     text-decoration: none; /* ללא קו תחתון */
     font-weight: 600; /* עובי מודגש */
     transition: color 0.2s ease; /* מעבר חלק */
 }
 
 .forgot-link:hover { /* מעבר עכבר על קישור שכחתי סיסמה */
-    color: #0ea5e9; /* תכלת בהיר */
+    color: var(--logo-cyan); /* תכלת בהיר */
     text-decoration: underline; /* קו תחתון */
 }
 
@@ -278,7 +297,7 @@ body { /* עיצוב גוף המסמך הראשי */
 
 .remember-checkbox { /* תיבת הסימון */
     cursor: pointer; /* סמן לחיצה */
-    accent-color: #0284c7; /* צבע כחול הלוגו */
+    accent-color: var(--logo-blue); /* צבע כחול הלוגו */
     width: 15px; /* רוחב */
     height: 15px; /* גובה */
 }
@@ -286,28 +305,27 @@ body { /* עיצוב גוף המסמך הראשי */
 .submit-btn { /* כפתור שליחת הטופס הראשי - עיצוב יוקרתי, חד וחלק */
     width: 100%; /* רוחב מלא */
     padding: 13px 20px; /* ריווח פנימי מדויק ונוח */
-    background: #0284c7; /* כחול טקטי יוקרתי תואם לוגו */
+    background: var(--logo-gradient); /* גרדיאנט כחול-ציאן יוקרתי תואם לוגו */
     color: #ffffff; /* טקסט לבן חד */
-    border: 1px solid #0369a1; /* מסגרת מעודנת */
+    border: none; /* ללא מסגרת כהה */
     border-radius: 8px; /* פינות מודרניות חדות */
     font-size: 14.5px; /* גודל פונט מאוזן */
-    font-weight: 600; /* עובי חצי מודגש מקצועי */
+    font-weight: 700; /* עובי חצי מודגש מקצועי */
     cursor: pointer; /* סמן יד */
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); /* אנימציה חלקה של תוכנה מקצועית */
-    box-shadow: 0 1px 2px rgba(2, 132, 199, 0.15), 0 4px 12px rgba(2, 132, 199, 0.2); /* צל אלגנטי ומעודן */
+    box-shadow: var(--logo-shadow); /* הילת צל תואמת לוגו */
     letter-spacing: 0.3px; /* מרווח אותיות נעים */
 }
 
 .submit-btn:hover { /* מעבר עכבר על כפתור השליחה */
-    background: #0369a1; /* גוון עמוק יותר בלחיצה/ריחוף */
-    border-color: #075985; /* חיזוק מסגרת */
-    box-shadow: 0 4px 16px rgba(2, 132, 199, 0.35); /* צל עדין מורגש */
+    background: var(--logo-gradient-hover); /* גוון עמוק יותר בלחיצה/ריחוף */
+    box-shadow: var(--logo-shadow-hover); /* צל מוגבר בריחוף */
     transform: translateY(-1px); /* הרמה מיקרוסקופית */
 }
 
 .submit-btn:active { /* בלחיצה */
     transform: translateY(0); /* חזרה למקום */
-    background: #075985; /* צבע לחיצה */
+    background: var(--logo-blue-deep); /* צבע לחיצה */
 }
 
 .submit-btn:disabled { /* כפתור מושבת בעת טעינה */
@@ -343,9 +361,9 @@ body { /* עיצוב גוף המסמך הראשי */
     font-family: 'JetBrains Mono', Consolas, monospace;
     font-size: 12.5px;
     font-weight: 700;
-    color: #0369a1;
-    background: #f0f9ff;
-    border: 1px solid #bae6fd;
+    color: var(--logo-blue);
+    background: rgba(0, 114, 255, 0.08);
+    border: 1px solid rgba(0, 198, 255, 0.3);
     padding: 2px 8px;
     border-radius: 5px;
     word-break: break-all;
@@ -360,7 +378,7 @@ body { /* עיצוב גוף המסמך הראשי */
     gap: 8px;
     font-size: 12.5px;
     font-weight: 600;
-    color: #0284c7;
+    color: var(--logo-blue);
     background: #f8fafc;
     border: 1px solid #e2e8f0;
     padding: 6px 16px;
@@ -372,7 +390,7 @@ body { /* עיצוב גוף המסמך הראשי */
 
 .otp-timer-box i {
     font-size: 13px;
-    color: #0284c7;
+    color: var(--logo-blue);
 }
 
 .otp-timer-box #reset-otp-timer-countdown,
@@ -428,15 +446,15 @@ body { /* עיצוב גוף המסמך הראשי */
 }
 
 .otp-box-digit:focus { /* פוקוס בקובייה */
-    border-color: #0284c7;
+    border-color: var(--logo-blue);
     background-color: #ffffff;
-    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15), 0 2px 4px rgba(2, 132, 199, 0.08);
+    box-shadow: 0 0 0 3px rgba(0, 114, 255, 0.18), 0 2px 4px rgba(0, 114, 255, 0.08);
 }
 
 .otp-box-digit.filled { /* קובייה מלאה במספר */
-    border-color: #0284c7;
-    background-color: #f0f9ff;
-    color: #0369a1;
+    border-color: var(--logo-blue);
+    background-color: rgba(0, 114, 255, 0.06);
+    color: var(--logo-blue);
 }
 
 .otp-box-digit:disabled {
@@ -458,7 +476,7 @@ body { /* עיצוב גוף המסמך הראשי */
 .resend-btn { /* כפתור שליחה חוזרת */
     background: none;
     border: none;
-    color: #0284c7;
+    color: var(--logo-blue);
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
@@ -468,8 +486,8 @@ body { /* עיצוב גוף המסמך הראשי */
 }
 
 .resend-btn:hover {
-    color: #0369a1;
-    background-color: #f0f9ff;
+    color: var(--logo-cyan);
+    background-color: rgba(0, 114, 255, 0.08);
 }
 
 .resend-btn:disabled {
@@ -496,12 +514,12 @@ body { /* עיצוב גוף המסמך הראשי */
 }
 
 .dev-code-hint { /* תיבת רמז קוד לבדיקות */
-    background-color: #f0f9ff; /* רקע תכלת בהיר */
-    border: 1px dashed #0284c7; /* מסגרת מקווקוות כחולה */
+    background-color: rgba(0, 114, 255, 0.06); /* רקע תכלת בהיר */
+    border: 1px dashed var(--logo-blue); /* מסגרת מקווקוות כחולה */
     border-radius: 8px; /* עיגול פינות */
     padding: 8px 12px; /* ריווח פנימי */
     font-size: 11px; /* גודל טקסט */
-    color: #0284c7; /* צבע כחול */
+    color: var(--logo-blue); /* צבע כחול */
     margin-top: 10px; /* מרווח עליון */
     display: none; /* מוסתר כברירת מחדל */
     direction: rtl; /* עברית */
@@ -514,7 +532,7 @@ body { /* עיצוב גוף המסמך הראשי */
 }
 
 .back-link { /* קישור חזרה */
-    color: #0284c7; /* צבע כחול הלוגו */
+    color: var(--logo-blue); /* צבע כחול הלוגו */
     font-size: 12px; /* גודל פונט */
     font-weight: 600; /* עובי מודגש */
     text-decoration: none; /* ללא קו */
@@ -522,7 +540,7 @@ body { /* עיצוב גוף המסמך הראשי */
 }
 
 .back-link:hover { /* מעבר עכבר */
-    color: #0ea5e9; /* כחול בהיר */
+    color: var(--logo-cyan); /* כחול בהיר */
     text-decoration: underline; /* קו תחתון */
 }
 
