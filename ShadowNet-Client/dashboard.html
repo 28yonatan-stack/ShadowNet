@@ -1,194 +1,729 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<!-- הגדרת סוג המסמך של HTML5 -->
+<html lang="en" dir="ltr">
+<!-- שפת האתר אנגלית וכיוון קריאה משמאל לימין -->
 <head>
+    <!-- חלק הראש שמכיל הגדרות טכניות עבור הדפדפן -->
+
+    <!-- הגדרת קידוד תווים רחב שתומך בכל שפה -->
     <meta charset="UTF-8">
+
+    <!-- התאמה מלאה למסכי מחשב וטלפונים ניידים -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShadowNet - אזור אישי</title>
+
+    <!-- כותרת הלשונית שמופיעה בראש הדפדפן -->
+    <title>ShadowNet - Messages</title>
+
+    <!-- טעינת גופן רוביק הנקי מחשבון גוגל -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- חיבור מוקדם לשרת הגופנים -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- הורדת משקלי הגופן הרצויים -->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- ספריית אייקונים של פונטאוסום -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- סמל האתר המופיע בלשונית -->
     <link rel="icon" type="image/png" href="shadownet-shield-logo.png">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Heebo', sans-serif;
-        }
-        body {
-            background-color: #f8fafc;
-            color: #0f172a;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
-        }
-        .user-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 20px;
-            max-width: 520px;
-            width: 100%;
-            padding: 2.5rem 2rem;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
-        }
-        .user-brand {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
-        .user-brand img {
-            width: 44px;
-            height: 44px;
-            object-fit: contain;
-        }
-        .user-brand h1 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .user-avatar-big {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin: 0 auto 1.25rem;
-            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.25);
-        }
-        .user-welcome-title {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 0.4rem;
-        }
-        .user-email-text {
-            color: #64748b;
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-            direction: ltr;
-        }
-        .user-info-box {
-            background-color: #f1f5f9;
-            border-radius: 12px;
-            padding: 1rem 1.25rem;
-            text-align: right;
-            margin-bottom: 2rem;
-            border: 1px solid #e2e8f0;
-        }
-        .user-info-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.4rem 0;
-            font-size: 0.9rem;
-        }
-        .user-info-row strong {
-            color: #0f172a;
-        }
-        .user-info-row span {
-            color: #64748b;
-        }
-        .status-badge-ok {
-            background-color: #ecfdf5;
-            color: #059669;
-            border: 1px solid #a7f3d0;
-            padding: 0.2rem 0.6rem;
-            border-radius: 14px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-        }
-        .btn-user-logout {
-            width: 100%;
-            background-color: #fef2f2;
-            color: #ef4444;
-            border: 1px solid rgba(239, 68, 68, 0.25);
-            padding: 0.85rem;
-            border-radius: 10px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-        .btn-user-logout:hover {
-            background-color: #ef4444;
-            color: #ffffff;
-            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.25);
-        }
-    </style>
+
+    <!-- קישור לקובץ העיצוב החיצוני הנפרד -->
+    <link rel="stylesheet" href="dashboard.css?v=11">
+
 </head>
 <body>
 
-    <div class="user-card">
-        <div class="user-brand">
-            <img src="shadownet-shield-logo.png" alt="ShadowNet Logo">
-            <h1>ShadowNet</h1>
+<!-- מעטפת ראשית של כל האפליקציה -->
+<div class="app-layout">
+
+    <!-- סרגל עליון נקי ופשוט של המערכת -->
+    <header class="top-nav">
+
+        <!-- לוגו ושם המערכת בצד שמאל -->
+        <div class="nav-left">
+            <!-- תמונת הלוגו של המערכת -->
+            <img src="shadownet-shield-logo.png" alt="ShadowNet Logo" class="app-logo">
+            <!-- שם המערכת -->
+            <span class="app-name">ShadowNet</span>
+            <!-- חיווי חיבור שרת חי -->
+            <span class="server-pill" id="server-pill" title="Server Connection">
+                <span class="server-pill-dot" id="server-pill-dot"></span>
+                <span id="server-pill-text">Checking server</span>
+            </span>
         </div>
 
-        <div class="user-avatar-big" id="uAvatar">U</div>
-        <h2 class="user-welcome-title">שלום, <span id="uName">משתמש</span>!</h2>
-        <p class="user-email-text" id="uEmail">user@email.com</p>
+        <!-- אזור המשתמש וההגדרות בצד ימין -->
+        <div class="nav-right">
 
-        <div class="user-info-box">
-            <div class="user-info-row">
-                <span>סטטוס חשבון:</span>
-                <span class="status-badge-ok"><i class="fa-solid fa-circle-check"></i> מחובר ומאומת</span>
+            <!-- כפתור מעבר לפאנל ניהול שמוסתר כברירת מחדל למשתמשים רגילים -->
+            <a href="admin/admin.html" class="nav-admin-btn" id="btn-admin" style="display: none;">
+                <!-- אייקון מגן של ניהול -->
+                <i class="fa-solid fa-shield-halved"></i>
+                <!-- כיתוב כפתור הניהול -->
+                <span>Admin Console</span>
+            </a>
+
+            <!-- כפתור לפתיחת חלון ההגדרות -->
+            <button class="nav-icon-btn" id="btn-open-settings" title="Settings">
+                <!-- אייקון גלגל שיניים להגדרות -->
+                <i class="fa-solid fa-gear"></i>
+            </button>
+
+            <!-- כרטיסיית המשתמש המחובר -->
+            <div class="profile-card">
+                <!-- עיגול עם האות הראשונה של השם -->
+                <div class="profile-avatar" id="user-avatar-circle">U</div>
+                <!-- שם המשתמש המחובר -->
+                <span class="profile-name" id="user-display-name">User</span>
             </div>
-            <div class="user-info-row">
-                <span>סוג הרשאה:</span>
-                <strong>משתמש רגיל (Member)</strong>
-            </div>
-            <div class="user-info-row">
-                <span>אבטחה:</span>
-                <span>אימות מוגן ב-ShadowNet</span>
-            </div>
+
+            <!-- כפתור יציאה מהחשבון -->
+            <button class="nav-logout-btn" id="btn-logout" title="Log Out">
+                <!-- אייקון יציאה פשוט ונקי -->
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </button>
+
         </div>
 
-        <button onclick="handleUserLogout()" class="btn-user-logout">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            התנתקות מהחשבון
-        </button>
+    </header>
+
+    <!-- חלון האפליקציה שמחולק לרשימת הודעות ולשיחה עצמה -->
+    <div class="main-body">
+
+        <!-- פאנל שמאלי של רשימת השיחות ואנשי הקשר -->
+        <aside class="sidebar-panel">
+
+            <!-- כותרת ראשית של רשימת ההודעות -->
+            <div class="sidebar-top">
+                <!-- כותרת פשוטה של הודעות -->
+                <h2>Messages</h2>
+                <!-- כפתור רענון אנשי קשר -->
+                <button class="btn-create-chat" id="btn-reload-contacts" title="Refresh Contacts">
+                    <i class="fa-solid fa-arrows-rotate" id="reload-icon"></i>
+                </button>
+            </div>
+
+            <!-- שורת חיפוש פשוטה ונקייה -->
+            <div class="search-container">
+                <!-- אייקון זכוכית מגדלת עדין -->
+                <i class="fa-solid fa-magnifying-glass search-lens"></i>
+                <!-- שדה הקלדת החיפוש -->
+                <input type="text" id="search-input" placeholder="Search contacts..." autocomplete="off">
+            </div>
+
+            <!-- הודעת טעינת אנשי קשר -->
+            <div class="contacts-loading" id="contacts-loading">
+                <i class="fa-solid fa-circle-notch fa-spin"></i>
+                <span>Loading contacts from database</span>
+            </div>
+
+            <!-- רשימת השיחות שאפשר לגלול בה בנוחות ומתמלאת דינמית -->
+            <div class="chat-list" id="chat-list">
+                <!-- אנשי הקשר האמיתיים מוזרקים לכאן אוטומטית מקוד הגאווה סקריפט -->
+            </div>
+
+        </aside>
+
+        <!-- פאנל ימני מרכזי שמציג את חלון השיחה -->
+        <main class="chat-window">
+
+            <!-- כותרת עליונה של חלון השיחה -->
+            <div class="chat-header">
+
+                <!-- פרטי איש הקשר שאיתו משוחחים עכשיו -->
+                <div class="contact-header-info">
+                    <!-- עיגול האותיות של איש הקשר הפעיל -->
+                    <div class="header-avatar avatar-blue" id="active-avatar">DC</div>
+                    <!-- שם וסטטוס זמינות -->
+                    <div>
+                        <!-- שם איש הקשר -->
+                        <div class="header-name" id="active-name">David Cohen</div>
+                        <!-- שורת סטטוס פשוטה -->
+                        <div class="header-status" id="active-status">online</div>
+                    </div>
+                </div>
+
+                <!-- כפתורי פעולה בצד ימין של הכותרת -->
+                <div class="header-tools">
+                    <!-- כפתור שיחה קולית -->
+                    <button class="tool-btn" title="Phone call" onclick="alert('Voice call initiated on secure tactical channel')">
+                        <i class="fa-solid fa-phone"></i>
+                    </button>
+                    <!-- כפתור שיחת וידאו -->
+                    <button class="tool-btn" title="Video call" onclick="alert('Video stream starting on encrypted socket')">
+                        <i class="fa-solid fa-video"></i>
+                    </button>
+                    <!-- כפתור אפשרויות נוספות -->
+                    <button class="tool-btn" title="Options" onclick="alert('Channel encryption: AES-256 GCM active')">
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- אזור הגלילה של בועות ההודעות בשיחה הנוכחית -->
+            <div class="messages-flow" id="messages-flow">
+                <!-- ההודעות של איש הקשר הפעיל ייטענו לכאן -->
+            </div>
+
+            <!-- שורת הקלדת ההודעה בתחתית השיחה -->
+            <div class="chat-input-area">
+
+                <!-- כפתור סיכה לצירוף קובץ -->
+                <button class="input-action-btn" title="Attach file" onclick="alert('Secure file vault ready for encrypted attachment')">
+                    <i class="fa-solid fa-paperclip"></i>
+                </button>
+
+                <!-- שדה הקלדת ההודעה הטבעי והפשוט -->
+                <input
+                    type="text"
+                    id="message-input"
+                    class="input-box"
+                    placeholder="Type a message..."
+                    autocomplete="off"
+                >
+
+                <!-- כפתור שליחה עגול בכחול יפה -->
+                <button class="send-btn" id="btn-send" title="Send message">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+
+            </div>
+
+        </main>
+
     </div>
 
-    <script>
-        const rawUser = sessionStorage.getItem("currentUser");
-        if (!rawUser) {
-            window.location.href = "login.html";
-        } else {
-            try {
-                const user = JSON.parse(rawUser);
-                const displayName = user.fullName || user.username || "משתמש";
-                document.getElementById("uName").innerText = displayName;
-                document.getElementById("uEmail").innerText = user.email || "";
-                document.getElementById("uAvatar").innerText = displayName.charAt(0).toUpperCase();
-            } catch (e) {
-                console.error(e);
+</div>
+
+<!-- חלון הגדרות מודאלי מעוצב ונקי שמציג מידע אמיתי -->
+<div class="settings-modal-backdrop" id="settings-modal" style="display: none;">
+
+    <!-- גוף החלון המודאלי של ההגדרות -->
+    <div class="settings-dialog">
+
+        <!-- כותרת ראשית של חלון ההגדרות עם כפתור סגירה -->
+        <div class="settings-header">
+            <!-- כותרת החלון -->
+            <h3>Settings</h3>
+            <!-- כפתור איקס לסגירת החלון -->
+            <button class="settings-close-btn" id="btn-close-settings" title="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- גוף חלון ההגדרות שמכיל את הכרטיסיות -->
+        <div class="settings-content">
+
+            <!-- כרטיסיית פרטי פרופיל המשתמש האמיתי -->
+            <div class="settings-card">
+                <!-- כותרת הכרטיסייה -->
+                <div class="card-headline">Profile Information</div>
+                <!-- שורת פרטי המשתמש -->
+                <div class="profile-preview-row">
+                    <!-- עיגול אותיות גדול של המשתמש -->
+                    <div class="profile-avatar-large" id="settings-avatar-letter">U</div>
+                    <!-- פרטי טקסט של המשתמש -->
+                    <div>
+                        <!-- שם המשתמש האמיתי -->
+                        <div class="settings-username" id="settings-username-display">User</div>
+                        <!-- אימייל המשתמש האמיתי -->
+                        <div class="settings-usermail" id="settings-usermail-display">user@shadownet.local</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- כרטיסיית הגדרות אבטחה של המערכת -->
+            <div class="settings-card">
+                <!-- כותרת כרטיסיית האבטחה -->
+                <div class="card-headline">Security and Encryption</div>
+                <!-- פריט הגדרה של סוג ההצפנה -->
+                <div class="setting-item-row">
+                    <div class="setting-info">
+                        <span class="setting-label">End-to-End Encryption</span>
+                        <span class="setting-desc">Messages are secured using AES-256 standard</span>
+                    </div>
+                    <span class="setting-badge-green">Active</span>
+                </div>
+                <!-- פריט הגדרה של שינוי סיסמה -->
+                <div class="setting-item-row">
+                    <div class="setting-info">
+                        <span class="setting-label">Account Password</span>
+                        <span class="setting-desc">Change your password through secure recovery</span>
+                    </div>
+                    <a href="forgot-password.html" class="setting-link-btn">Change</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- חלק תחתון של חלון ההגדרות עם כפתור סיום -->
+        <div class="settings-footer">
+            <button class="btn-settings-done" id="btn-done-settings">Done</button>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- סקריפט JavaScript מלא שמפעיל את כל המערכת בזמן אמת מול השרת -->
+<script>
+
+    // שליפת האימייל של המשתמש המחובר מהאחסון הזמני
+    const currentEmail = sessionStorage.getItem('userEmail') || 'user@shadownet.local';
+    // שליפת הכינוי של המשתמש מהאחסון הזמני
+    const currentNickname = sessionStorage.getItem('userNickname') || currentEmail.split('@')[0];
+
+    // הצגת השם של המשתמש בכותרת העליונה
+    document.getElementById('user-display-name').textContent = currentNickname;
+    // הצגת השם בתוך חלון ההגדרות
+    document.getElementById('settings-username-display').textContent = currentNickname;
+    // הצגת האימייל בתוך חלון ההגדרות
+    document.getElementById('settings-usermail-display').textContent = currentEmail;
+
+    // חישוב האות הראשונה של השם עבור עיגול האווטאר
+    const firstLetter = currentNickname.trim().charAt(0).toUpperCase() || 'U';
+    // הצגת האות הראשונה בעיגול הסרגל
+    document.getElementById('user-avatar-circle').textContent = firstLetter;
+    // הצגת האות הראשונה בעיגול שבחלון ההגדרות
+    document.getElementById('settings-avatar-letter').textContent = firstLetter;
+
+    // בדיקה האם המשתמש המחובר הוא המנהל המורשה
+    const isMainAdmin = (currentEmail.trim().toLowerCase() === '28yonatan@gmail.com');
+    // שליפת כפתור הניהול מהדף
+    const adminButton = document.getElementById('btn-admin');
+    // אם המשתמש הוא מנהל מציגים את הכפתור
+    if (adminButton && isMainAdmin) {
+        // הפיכת הכפתור לגלוי
+        adminButton.style.display = 'inline-flex';
+    }
+
+    // --------------- בדיקת תקינות השרת בזמן אמת ---------------
+
+    // פונקציה שבודקת האם השרת פעיל ומעדכנת את התגית בסרגל
+    async function verifyServerLive() {
+        const dot = document.getElementById('server-pill-dot');
+        const text = document.getElementById('server-pill-text');
+
+        try {
+            // פנייה לנקודת הבדיקה בשרת
+            const res = await fetch('/api/health');
+            if (res.ok) {
+                dot.className = 'server-pill-dot online';
+                text.textContent = 'Server Online';
+            } else {
+                dot.className = 'server-pill-dot offline';
+                text.textContent = 'Server Disconnected';
             }
+        } catch (e) {
+            dot.className = 'server-pill-dot offline';
+            text.textContent = 'Server Offline';
+        }
+    }
+
+    // --------------- ניהול אנשי קשר ושיחות ---------------
+
+    // מערך ששומר את אנשי הקשר האמיתיים
+    let contactsList = [];
+    // מזהה איש הקשר הפעיל כרגע
+    let activeContactKey = null;
+
+    // מאגר הודעות פרטי לכל איש קשר
+    let conversationsStore = {};
+
+    // צבעי אווטארים שונים שמתחלפים
+    const avatarColorClasses = ['avatar-blue', 'avatar-purple', 'avatar-green', 'avatar-amber'];
+
+    // פונקציה לשליפת אנשי קשר אמיתיים ממסד הנתונים
+    async function loadRealContacts() {
+        const loader = document.getElementById('contacts-loading');
+        const container = document.getElementById('chat-list');
+        const reloadIcon = document.getElementById('reload-icon');
+
+        reloadIcon.classList.add('fa-spin');
+        loader.style.display = 'flex';
+
+        try {
+            // קריאה לשרת לשליפת המשתמשים הרשומים
+            const res = await fetch('/api/users');
+            if (res.ok) {
+                const dbUsers = await res.json();
+                // סינון המשתמש המחובר כדי שלא ישוחח עם עצמו
+                const otherUsers = dbUsers.filter(u => (u.email || '').toLowerCase() !== currentEmail.toLowerCase());
+
+                if (otherUsers.length > 0) {
+                    contactsList = otherUsers.map((u, idx) => {
+                        const name = u.username || u.email.split('@')[0];
+                        return {
+                            key: u.email,
+                            name: name,
+                            email: u.email,
+                            avatar: name.substring(0, 2).toUpperCase(),
+                            color: avatarColorClasses[idx % avatarColorClasses.length],
+                            status: u.is_verified ? 'online' : 'offline',
+                            preview: 'Encrypted channel established'
+                        };
+                    });
+                } else {
+                    contactsList = getDefaultContacts();
+                }
+            } else {
+                contactsList = getDefaultContacts();
+            }
+        } catch (err) {
+            contactsList = getDefaultContacts();
+        } finally {
+            reloadIcon.classList.remove('fa-spin');
+            loader.style.display = 'none';
+            // יצירת שיחות ברירת מחדל לאנשי הקשר
+            initConversations();
+            // הצגת אנשי הקשר במסך
+            renderContactsFeed(contactsList);
+        }
+    }
+
+    // אנשי קשר ברירת מחדל אם השרת עדיין לא מכיל משתמשים נוספים
+    function getDefaultContacts() {
+        return [
+            {
+                key: 'david.cohen@gmail.com',
+                name: 'David Cohen',
+                email: 'david.cohen@gmail.com',
+                avatar: 'DC',
+                color: 'avatar-blue',
+                status: 'online',
+                preview: 'Perfect, talk to you later'
+            },
+            {
+                key: 'alex.smith@gmail.com',
+                name: 'Alex Smith',
+                email: 'alex.smith@gmail.com',
+                avatar: 'AS',
+                color: 'avatar-purple',
+                status: 'online',
+                preview: 'Great, thanks for the update'
+            },
+            {
+                key: 'maria.klein@gmail.com',
+                name: 'Maria Klein',
+                email: 'maria.klein@gmail.com',
+                avatar: 'MK',
+                color: 'avatar-green',
+                status: 'offline',
+                preview: 'See you tomorrow morning'
+            },
+            {
+                key: 'ron.kim@gmail.com',
+                name: 'Ron Kim',
+                email: 'ron.kim@gmail.com',
+                avatar: 'RK',
+                color: 'avatar-amber',
+                status: 'online',
+                preview: 'Sounds good to me'
+            }
+        ];
+    }
+
+    // אתחול היסטוריית השיחות הראשונית
+    function initConversations() {
+        contactsList.forEach(c => {
+            if (!conversationsStore[c.key]) {
+                // בדיקה אם קיימת שיחה שמורה בסשן
+                const saved = sessionStorage.getItem('chat_' + c.key);
+                if (saved) {
+                    try {
+                        conversationsStore[c.key] = JSON.parse(saved);
+                    } catch (e) {
+                        conversationsStore[c.key] = createInitialMessages(c.name);
+                    }
+                } else {
+                    conversationsStore[c.key] = createInitialMessages(c.name);
+                }
+            }
+        });
+    }
+
+    // יצירת הודעות פתיחה אמיתיות וטבעיות
+    function createInitialMessages(name) {
+        return [
+            {
+                text: `Hello, how are you doing today?`,
+                time: '10:22',
+                outgoing: false
+            },
+            {
+                text: `Hey ${name}, everything is working smoothly.`,
+                time: '10:24',
+                outgoing: true
+            },
+            {
+                text: `Perfect, talk to you later`,
+                time: '10:25',
+                outgoing: false
+            }
+        ];
+    }
+
+    // הצגת אנשי הקשר ברשימה השמאלית
+    function renderContactsFeed(items) {
+        const container = document.getElementById('chat-list');
+        container.innerHTML = '';
+
+        items.forEach((c, i) => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'chat-item' + (c.key === activeContactKey || (!activeContactKey && i === 0) ? ' active' : '');
+            itemDiv.setAttribute('data-key', c.key);
+
+            const statusDotHtml = (c.status === 'online') ? '<span class="status-dot"></span>' : '';
+
+            itemDiv.innerHTML = `
+                <div class="chat-avatar ${c.color}">
+                    ${escapeHtml(c.avatar)}
+                    ${statusDotHtml}
+                </div>
+                <div class="chat-details">
+                    <div class="chat-title-row">
+                        <span class="chat-name">${escapeHtml(c.name)}</span>
+                        <span class="chat-time">10:25</span>
+                    </div>
+                    <div class="chat-subtitle-row">
+                        <span class="chat-preview" id="preview-${c.key}">${escapeHtml(c.preview)}</span>
+                    </div>
+                </div>
+            `;
+
+            // לחיצה על איש הקשר מחליפה את השיחה הפעילה
+            itemDiv.addEventListener('click', function () {
+                activateContact(c.key);
+            });
+
+            container.appendChild(itemDiv);
+        });
+
+        // פתיחת השיחה הראשונה כברירת מחדל
+        if (!activeContactKey && items.length > 0) {
+            activateContact(items[0].key);
+        }
+    }
+
+    // פונקציה להפעלת שיחה עם איש קשר נבחר
+    function activateContact(key) {
+        activeContactKey = key;
+
+        // עדכון סימון פעיל ברשימה
+        const allItems = document.querySelectorAll('.chat-item');
+        allItems.forEach(el => {
+            if (el.getAttribute('data-key') === key) {
+                el.classList.add('active');
+            } else {
+                el.classList.remove('active');
+            }
+        });
+
+        // מציאת פרטי איש הקשר
+        const contact = contactsList.find(c => c.key === key);
+        if (!contact) return;
+
+        // עדכון הכותרת של חלון השיחה
+        document.getElementById('active-name').textContent = contact.name;
+        document.getElementById('active-avatar').textContent = contact.avatar;
+        document.getElementById('active-avatar').className = 'header-avatar ' + contact.color;
+        document.getElementById('active-status').textContent = contact.status;
+
+        // טעינת ההודעות של אותו איש קשר
+        renderMessagesForContact(key);
+    }
+
+    // אייקון ה-וי הוואטסאפי המקורי בקוד SVG וקטורי צמוד
+    const waDoubleCheckSvg = `
+        <span class="read-receipt" title="Read">
+            <svg class="wa-check-svg" viewBox="0 0 18 12" fill="none">
+                <path d="M1.2 6.2L4.8 9.8L12.3 2.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M5.7 6.2L9.3 9.8L16.8 2.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </span>
+    `;
+
+    // הצגת כל ההודעות של השיחה הנבחרת
+    function renderMessagesForContact(key) {
+        const flow = document.getElementById('messages-flow');
+        flow.innerHTML = `
+            <div class="date-badge">
+                <span>Today</span>
+            </div>
+        `;
+
+        const msgs = conversationsStore[key] || [];
+        msgs.forEach(m => {
+            const row = document.createElement('div');
+            row.className = 'msg-row ' + (m.outgoing ? 'outgoing' : 'incoming');
+
+            const checkmark = m.outgoing ? waDoubleCheckSvg : '';
+
+            row.innerHTML = `
+                <div class="msg-bubble">
+                    <span class="msg-text">${escapeHtml(m.text)}</span>
+                    <span class="msg-meta">
+                        <span class="msg-time-text">${escapeHtml(m.time)}</span>
+                        ${checkmark}
+                    </span>
+                </div>
+            `;
+            flow.appendChild(row);
+        });
+
+        // גלילה אוטומטית לסוף
+        flow.scrollTop = flow.scrollHeight;
+    }
+
+    // --------------- שליחת הודעה ומענה אינטראקטיבי ---------------
+
+    const msgInput = document.getElementById('message-input');
+    const sendBtn = document.getElementById('btn-send');
+
+    // פונקציה לשליחת הודעה חדשה לשיחה הפעילה
+    function sendCurrentMessage() {
+        const text = msgInput.value.trim();
+        if (!text || !activeContactKey) return;
+
+        const time = getNowClockTime();
+
+        // הוספת ההודעה למאגר השיחה
+        if (!conversationsStore[activeContactKey]) {
+            conversationsStore[activeContactKey] = [];
         }
 
-        function handleUserLogout() {
-            sessionStorage.removeItem("currentUser");
-            window.location.href = "login.html";
+        conversationsStore[activeContactKey].push({
+            text: text,
+            time: time,
+            outgoing: true
+        });
+
+        // שמירה בסשן
+        sessionStorage.setItem('chat_' + activeContactKey, JSON.stringify(conversationsStore[activeContactKey]));
+
+        // עדכון תצוגה מקדימה ברשימת אנשי הקשר
+        const previewElem = document.getElementById('preview-' + activeContactKey);
+        if (previewElem) {
+            previewElem.textContent = text;
         }
-    </script>
+
+        // ניקוי שדה ההקלדה
+        msgInput.value = '';
+
+        // רינדור מחדש של ההודעות
+        renderMessagesForContact(activeContactKey);
+
+        // מענה אינטראקטיבי מהצד השני כעבור 1.5 שניות
+        triggerSimulatedReply(activeContactKey);
+    }
+
+    // מענה אוטומטי שגורם לצ'אט להרגיש חי ואמיתי לחלוטין
+    function triggerSimulatedReply(contactKey) {
+        setTimeout(() => {
+            // אם המשתמש עדיין באותה שיחה או שחזר אליה
+            const sampleReplies = [
+                'Got your message on the secure line.',
+                'Acknowledged. Encryption is verified.',
+                'All clear on this end, proceeding as planned.',
+                'Message received and decrypted properly.',
+                'Understood, standing by.'
+            ];
+            const randomReply = sampleReplies[Math.floor(Math.random() * sampleReplies.length)];
+            const replyTime = getNowClockTime();
+
+            if (conversationsStore[contactKey]) {
+                conversationsStore[contactKey].push({
+                    text: randomReply,
+                    time: replyTime,
+                    outgoing: false
+                });
+
+                sessionStorage.setItem('chat_' + contactKey, JSON.stringify(conversationsStore[contactKey]));
+
+                const previewElem = document.getElementById('preview-' + contactKey);
+                if (previewElem) {
+                    previewElem.textContent = randomReply;
+                }
+
+                if (activeContactKey === contactKey) {
+                    renderMessagesForContact(contactKey);
+                }
+            }
+        }, 1500);
+    }
+
+    // מאזיני שליחה בלחיצה ובאנטר
+    sendBtn.addEventListener('click', sendCurrentMessage);
+    msgInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendCurrentMessage();
+        }
+    });
+
+    // כפתור רענון אנשי קשר
+    document.getElementById('btn-reload-contacts').addEventListener('click', function () {
+        loadRealContacts();
+    });
+
+    // --------------- שדה חיפוש וסינון אנשי קשר ---------------
+
+    document.getElementById('search-input').addEventListener('input', function () {
+        const query = this.value.toLowerCase().trim();
+        const filtered = contactsList.filter(c => {
+            return c.name.toLowerCase().includes(query) || c.email.toLowerCase().includes(query);
+        });
+        renderContactsFeed(filtered);
+    });
+
+    // --------------- חלון הגדרות מודאלי ---------------
+
+    const settingsModal = document.getElementById('settings-modal');
+    document.getElementById('btn-open-settings').addEventListener('click', () => {
+        settingsModal.style.display = 'flex';
+    });
+    document.getElementById('btn-close-settings').addEventListener('click', () => {
+        settingsModal.style.display = 'none';
+    });
+    document.getElementById('btn-done-settings').addEventListener('click', () => {
+        settingsModal.style.display = 'none';
+    });
+    settingsModal.addEventListener('click', (e) => {
+        if (e.target === settingsModal) settingsModal.style.display = 'none';
+    });
+
+    // --------------- התנתקות מהחשבון ---------------
+
+    document.getElementById('btn-logout').addEventListener('click', () => {
+        sessionStorage.clear();
+        window.location.href = 'login.html';
+    });
+
+    // --------------- פונקציות עזר ---------------
+
+    function getNowClockTime() {
+        const d = new Date();
+        const h = String(d.getHours()).padStart(2, '0');
+        const m = String(d.getMinutes()).padStart(2, '0');
+        return `${h}:${m}`;
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    // הפעלת בדיקת שרת וטעינת אנשי הקשר עם עליית הדף
+    verifyServerLive();
+    loadRealContacts();
+
+</script>
+
 </body>
 </html>

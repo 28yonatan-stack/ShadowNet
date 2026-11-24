@@ -181,55 +181,85 @@
 
         // הצגת הודעת סטטוס
         function showMessage(text, isError) {
+            // אלמנט תיבת ההודעה
             const msgEl = document.getElementById('status-message');
+            // שתילת הטקסט של ההודעה
             msgEl.innerText = text;
+            // הוספת צבע אדום לשגיאה או ירוק להצלחה
             msgEl.className = 'status-msg ' + (isError ? 'status-error' : 'status-success');
+            // הצגת האלמנט על המסך
             msgEl.style.display = 'block';
         }
 
-        // בדיקת תקינות אימייל בזמן אמת (שלב 1)
+        // בדיקת תקינות אימייל בזמן אמת שלב 1
         function liveValidateEmail(force = false) {
+            // שדה קלט האימייל
             const el  = document.getElementById('signup-email');
+            // אלמנט הודעת השגיאה מתחת לשדה
             const err = document.getElementById('email-error');
+            // קריאת הערך הנקי ללא רווחים
             const val = el.value.trim();
 
+            // אם השדה ריק
             if (!val) {
+                // אם נדרש לבדוק בעת שליחה
                 if (force) { setFieldError(el, err, 'Please enter your email address'); return false; }
+                // ניקוי סימון שגיאה
                 clearField(el, err); return true;
             }
+            // בדיקה מול פונקציית האימות הראשית
             const check = isValidEmail(val);
+            // אם המבנה אינו חוקי מציגים הודעת שגיאה
             if (!check.ok) { setFieldError(el, err, check.msg); return false; }
+            // סימון השדה במסגרת ירוקה
             setFieldOk(el, err); return true;
         }
 
-        // בדיקת תקינות שם מלא בזמן אמת (שלב 3)
+        // בדיקת תקינות שם מלא בזמן אמת שלב 3
         function liveValidateFullName(force = false) {
+            // שדה קלט השם המלא
             const el  = document.getElementById('full-name');
+            // אלמנט הודעת השגיאה
             const err = document.getElementById('fullname-error');
+            // קריאת הערך הנקי ללא רווחים
             const val = el.value.trim();
 
+            // אם השדה ריק
             if (!val) {
+                // דרישת מילוי השדה
                 if (force) { setFieldError(el, err, 'Full name is required'); return false; }
+                // ניקוי סימון שגיאה
                 clearField(el, err); return true;
             }
+            // בדיקת אורך מינימלי של 2 אותיות
             if (val.length < 2) { setFieldError(el, err, 'Name must be at least 2 characters'); return false; }
+            // סימון השדה כתקין
             setFieldOk(el, err); return true;
         }
 
-        // בדיקת תקינות שם משתמש בזמן אמת (שלב 3)
+        // בדיקת תקינות שם משתמש בזמן אמת שלב 3
         function liveValidateUsername(force = false) {
+            // שדה קלט שם המשתמש
             const el  = document.getElementById('username');
+            // אלמנט הודעת השגיאה
             const err = document.getElementById('username-error');
+            // קריאת הערך הנקי
             const val = el.value.trim();
 
+            // אם השדה ריק
             if (!val) {
+                // דרישת מילוי השדה
                 if (force) { setFieldError(el, err, 'Username is required'); return false; }
+                // ניקוי סימון שגיאה
                 clearField(el, err); return true;
             }
+            // בדיקת אורך מינימלי של 3 תווים
             if (val.length < 3) { setFieldError(el, err, 'Username must be at least 3 characters'); return false; }
+            // בדיקה שהכינוי מכיל אותיות מספרים ומקפים בלבד
             if (!/^[a-zA-Z0-9_.\-]+$/.test(val)) {
                 setFieldError(el, err, 'Only letters, numbers, _ and . allowed'); return false;
             }
+            // סימון השדה כתקין במסגרת ירוקה
             setFieldOk(el, err); return true;
         }
 

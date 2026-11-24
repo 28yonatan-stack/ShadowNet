@@ -19,35 +19,43 @@ public class EmailService
         _config = config;
     }
 
-    // פונקציה לשליחת קוד אימות באימייל
+    // פונקציה ראשית לשליחת קוד אימות באימייל
     public bool SendCode(string toEmail, string subject, string otpCode, string action)
     {
-        // 1. קריאת הגדרות שרת הדואר מקובץ ההגדרות
+        // שליפת הגדרות שרת הדואר מקובץ ההגדרות של האפליקציה
         var smtp = _config.GetSection("SmtpSettings");
+        // כתובת שרת הדואר היוצא של גוגל
         string host = smtp["Host"] ?? "smtp.gmail.com";
+        // פורט התקשורת המאובטח 587
         int port = int.TryParse(smtp["Port"], out int p) ? p : 587;
+        // כתובת האימייל שממנה נשלחת ההודעה
         string senderEmail = smtp["SenderEmail"] ?? "shadownet.security@gmail.com";
+        // שם המשתמש לחשבון השליחה
         string username = smtp["Username"] ?? "";
-        // קריאת סיסמת ה-SMTP בצורה מאובטחת ממשתנה סביבה (ללא חשיפה בקוד)
+        // קריאת סיסמת השרת בצורה מאובטחת מתוך משתני הסביבה של המערכת
         string password = Environment.GetEnvironmentVariable("SHADOWNET_SMTP_PASSWORD") 
                        ?? Environment.GetEnvironmentVariable("SMTP_PASSWORD") 
                        ?? smtp["Password"] 
                        ?? "";
 
-        // 2. אם לא הוגדרו שם משתמש וסיסמה, לא נכשיל את הפעולה
+        // בדיקה אם חסרים פרטי הזדהות כדי לא להכשיל את המערכת בזמן פיתוח
         if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
         {
+            // הדפסת הודעה לקונסול שהשליחה נדלגה בגלל חוסר בסיסמה
             Console.WriteLine("[Email Service] SMTP credentials not set, skipping real send.");
+            // החזרת תשובה חיובית כדי לאפשר המשך בדיקות
             return true;
         }
 
         try
         {
-            // 3. הגדרת לקוח SMTP מול שרת Gmail
+            // פתיחת חיבור לקוח מול שרת הדואר של גוגל
             using var client = new SmtpClient(host, port)
             {
-                Credentials = new NetworkCredential(username, password), // אימות מול גוגל
-                EnableSsl = true // חיבור מאובטח ומוצפן ב-SSL/TLS
+                // העברת שם המשתמש והסיסמה של חשבון השולח
+                Credentials = new NetworkCredential(username, password),
+                // הפעלת הצפנת רשת מאובטחת
+                EnableSsl = true
             };
 
             // 4. בניית תוכן הודעת הדוא"ל המעוצבת בסגנון מיתוג ShadowNet
@@ -124,27 +132,36 @@ public class EmailService
 </body>
 </html>";
 
+            // יצירת אובייקט הודעת אימייל חדשה
             var mail = new MailMessage
             {
+                // הגדרת כתובת השולח ושם התצוגה בעברית ובאנגלית
                 From = new MailAddress(senderEmail, "ShadowNet Security", Encoding.UTF8),
+                // נושא הודעת הדואל
                 Subject = $"ShadowNet - {subject}",
+                // תוכן גוף המייל המעוצב בפורמט עשיר
                 Body = htmlContent,
+                // הגדרה שההודעה מכילה קוד תצוגה עשיר
                 IsBodyHtml = true,
+                // קידוד תוכן ההודעה
                 BodyEncoding = Encoding.UTF8
             };
 
-            // הוספת כתובת הנמען
+            // הוספת כתובת האימייל של הנמען שאליו שולחים את הקוד
             mail.To.Add(toEmail);
 
-            // שליחת המייל בפועל
+            // שליחת הודעת הדואל בפועל דרך שרת האינטרנט
             client.Send(mail);
+            // הדפסת הודעת אישור לקונסול של השרת
             Console.WriteLine($"[Email Service] Sent verification code to {toEmail}");
+            // החזרת תשובת הצלחה
             return true;
         }
         catch (Exception ex)
         {
-            // אם הייתה שגיאה בשליחה, נדפיס אותה למסך השרת
+            // הדפסת הודעת שגיאה אם שליחת המייל נכשלה
             Console.WriteLine($"[Email Error] Failed to send email: {ex.Message}");
+            // החזרת תשובה שלילית במקרה של תקלה
             return false;
         }
     }

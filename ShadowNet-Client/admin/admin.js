@@ -297,7 +297,7 @@ async function checkSystemStatus() {
 // =============================================================================
 
 /**
- * מפתח שמירת יומן אירועי האבטחה ב-LocalStorage
+ * מפתח שמירת יומן אירועי האבטחה ב-SessionStorage (מאובטח ומתנקה בסיום הסשן)
  */
 const AUDIT_STORAGE_KEY = "shadownet_audit_logs_v1";
 
@@ -416,11 +416,11 @@ async function copyCryptoHash() {
 }
 
 /**
- * שליפת רשימת אירועי האבטחה מה-LocalStorage
+ * שליפת רשימת אירועי האבטחה מה-SessionStorage
  */
 function getAuditLogs() {
     try {
-        const saved = localStorage.getItem(AUDIT_STORAGE_KEY);
+        const saved = sessionStorage.getItem(AUDIT_STORAGE_KEY);
         if (saved) {
             const parsed = JSON.parse(saved);
             if (Array.isArray(parsed) && parsed.length > 0) return parsed;
@@ -432,11 +432,11 @@ function getAuditLogs() {
 }
 
 /**
- * שמירת רשימת אירועים ל-LocalStorage
+ * שמירת רשימת אירועים ל-SessionStorage
  */
 function saveAuditLogs(logs) {
     try {
-        localStorage.setItem(AUDIT_STORAGE_KEY, JSON.stringify(logs));
+        sessionStorage.setItem(AUDIT_STORAGE_KEY, JSON.stringify(logs));
     } catch (e) {
         console.error("Error saving audit logs:", e);
     }
@@ -590,7 +590,7 @@ function refreshAuditLogs() {
  */
 function clearAuditLogs() {
     if (confirm("האם לאפס את יומן אירועי האבטחה לרשומות המערכת המקוריות?")) {
-        localStorage.removeItem(AUDIT_STORAGE_KEY);
+        sessionStorage.removeItem(AUDIT_STORAGE_KEY);
         renderAuditLogs();
     }
 }

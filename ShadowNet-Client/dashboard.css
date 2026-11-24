@@ -1,0 +1,1346 @@
+/* קובץ עיצוב חיצוני לדשבורד של אפליקציית ההודעות */
+/* כל ההגדרות מרוכזות כאן בצורה נקייה ומסודרת */
+
+/* איפוס שוליים והגדרות ברירת מחדל לכל הרכיבים */
+* {
+    /* ביטול שוליים חיצוניים */
+    margin: 0;
+    /* ביטול ריפוד פנימי */
+    padding: 0;
+    /* חישוב גודל כולל מסגרות */
+    box-sizing: border-box;
+    /* גופן רוביק נקי ונעים */
+    font-family: 'Rubik', sans-serif;
+}
+
+/* הגדרות גוף הדף הראשי */
+body {
+    /* צבע רקע כהה רגוע כמו במצב לילה */
+    background-color: #0e1621;
+    /* צבע טקסט בהיר וקריא */
+    color: #e5edf5;
+    /* גובה מלא של המסך */
+    height: 100vh;
+    /* מניעת פסי גלילה כפולים */
+    overflow: hidden;
+    /* כיוון קריאה משמאל לימין */
+    direction: ltr;
+}
+
+/* מעטפת ראשית של כל האפליקציה */
+.app-layout {
+    /* גובה מלא של חלון הדפדפן */
+    height: 100vh;
+    /* סידור אנכי של הסרגל העליון וגוף האפליקציה */
+    display: flex;
+    flex-direction: column;
+    /* מניעת חריגה מהמסך */
+    overflow: hidden;
+}
+
+/* סרגל עליון נקי וקלאסי */
+.top-nav {
+    /* גובה קבוע של הסרגל */
+    height: 60px;
+    /* רקע כהה נעים מעט בהיר מהרקע הראשי */
+    background-color: #17212b;
+    /* גבול תחתון עדין ודק */
+    border-bottom: 1px solid #232e3c;
+    /* פריסת שורה */
+    display: flex;
+    /* יישור אנכי למרכז */
+    align-items: center;
+    /* רווח בין צד שמאל לצד ימין */
+    justify-content: space-between;
+    /* ריפוד בצדדים */
+    padding: 0 20px;
+    /* מניעת התכווצות */
+    flex-shrink: 0;
+}
+
+/* אזור הלוגו ושם המערכת */
+.nav-left {
+    /* סידור אופקי */
+    display: flex;
+    /* יישור למרכז */
+    align-items: center;
+    /* רווח בין הלוגו לשם */
+    gap: 10px;
+}
+
+/* תמונת הלוגו של המערכת */
+.app-logo {
+    /* רוחב הלוגו */
+    width: 32px;
+    /* גובה הלוגו */
+    height: 32px;
+}
+
+/* שם המערכת בראש הדף */
+.app-name {
+    /* גודל גופן */
+    font-size: 1.15rem;
+    /* משקל עבה */
+    font-weight: 700;
+    /* צבע טקסט לבן נקי */
+    color: #ffffff;
+}
+
+/* אזור המשתמש וההגדרות בצד ימין */
+.nav-right {
+    /* סידור אופקי */
+    display: flex;
+    /* יישור למרכז הגובה */
+    align-items: center;
+    /* רווח בין הכפתורים */
+    gap: 12px;
+}
+
+/* כפתור פאנל ניהול עדין */
+.nav-admin-btn {
+    /* סידור אופקי של אייקון וטקסט */
+    display: inline-flex;
+    align-items: center;
+    /* רווח בין האייקון למלל */
+    gap: 6px;
+    /* צבע כחול בהיר */
+    color: #5288c1;
+    /* רקע שקט */
+    background: rgba(82, 136, 193, 0.12);
+    /* מסגרת דקה */
+    border: 1px solid rgba(82, 136, 193, 0.25);
+    /* ריפוד פנימי */
+    padding: 6px 12px;
+    /* פינות מעוגלות */
+    border-radius: 6px;
+    /* גודל גופן */
+    font-size: 0.8rem;
+    /* משקל עבה למחצה */
+    font-weight: 600;
+    /* ביטול קו תחתון של קישור */
+    text-decoration: none;
+    /* מעבר חלק בשינוי צבע */
+    transition: background 0.2s ease;
+}
+
+/* אפקט ריחוף על כפתור הניהול */
+.nav-admin-btn:hover {
+    /* רקע מודגש קלות */
+    background: rgba(82, 136, 193, 0.2);
+    /* צבע טקסט בהיר יותר */
+    color: #79aee4;
+}
+
+/* כפתור גלגל שיניים של הגדרות בסרגל העליון */
+.nav-icon-btn {
+    /* רוחב הכפתור */
+    width: 34px;
+    /* גובה הכפתור */
+    height: 34px;
+    /* פינות מעוגלות */
+    border-radius: 8px;
+    /* ביטול מסגרת */
+    border: 1px solid #232e3c;
+    /* רקע שקט */
+    background: #0e1621;
+    /* צבע אייקון באפור כחלחל */
+    color: #8b9bb0;
+    /* גודל אייקון */
+    font-size: 0.95rem;
+    /* מירכוז האייקון */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* סמן יד ללחיצה */
+    cursor: pointer;
+    /* מעבר חלק */
+    transition: all 0.2s ease;
+}
+
+/* אפקט ריחוף על כפתור ההגדרות */
+.nav-icon-btn:hover {
+    /* שינוי צבע לכחול בהיר */
+    color: #5288c1;
+    /* רקע מודגש מעט */
+    background: rgba(82, 136, 193, 0.12);
+    /* מסגרת כחולה עדינה */
+    border-color: rgba(82, 136, 193, 0.35);
+}
+
+/* כרטיסיית המשתמש המחובר */
+.profile-card {
+    /* סידור אופקי */
+    display: flex;
+    align-items: center;
+    /* רווח בין האווטאר לשם */
+    gap: 8px;
+    /* רקע שקט */
+    background: #0e1621;
+    /* מסגרת דקה */
+    border: 1px solid #232e3c;
+    /* ריפוד נעים */
+    padding: 4px 12px 4px 5px;
+    /* פינות מעוגלות */
+    border-radius: 8px;
+}
+
+/* עיגול האות של המשתמש */
+.profile-avatar {
+    /* רוחב קבוע */
+    width: 28px;
+    /* גובה קבוע */
+    height: 28px;
+    /* עיגול מלא */
+    border-radius: 50%;
+    /* רקע כחול עדין */
+    background: #2b5278;
+    /* צבע אות בלבן */
+    color: #ffffff;
+    /* גופן עבה */
+    font-weight: 700;
+    /* גודל גופן */
+    font-size: 0.85rem;
+    /* מירכוז האות */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* שם המשתמש בכותרת */
+.profile-name {
+    /* גודל גופן */
+    font-size: 0.85rem;
+    /* משקל בינוני */
+    font-weight: 600;
+    /* צבע לבן */
+    color: #f1f5f9;
+}
+
+/* כפתור יציאה מהחשבון */
+.nav-logout-btn {
+    /* רוחב הכפתור */
+    width: 34px;
+    /* גובה הכפתור */
+    height: 34px;
+    /* פינות מעוגלות */
+    border-radius: 8px;
+    /* ביטול מסגרת */
+    border: 1px solid #232e3c;
+    /* רקע שקט */
+    background: #0e1621;
+    /* צבע אייקון באפור */
+    color: #8b9bb0;
+    /* גודל אייקון */
+    font-size: 0.9rem;
+    /* מירכוז האייקון */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* סמן יד ללחיצה */
+    cursor: pointer;
+    /* מעבר חלק */
+    transition: all 0.2s ease;
+}
+
+/* אפקט ריחוף על כפתור יציאה */
+.nav-logout-btn:hover {
+    /* צבע אדמדם */
+    color: #ef5350;
+    /* רקע אדום חלש מאוד */
+    background: rgba(239, 83, 80, 0.1);
+    /* מסגרת אדמדמה */
+    border-color: rgba(239, 83, 80, 0.3);
+}
+
+/* גוף האפליקציה המרכזי שמחלק את המסך */
+.main-body {
+    /* תופס את שאר הגובה הפנוי */
+    flex: 1;
+    /* פריסת שורה */
+    display: flex;
+    /* מניעת גלישה כללית */
+    overflow: hidden;
+}
+
+/* פאנל הצד של אנשי הקשר */
+.sidebar-panel {
+    /* רוחב קבוע ונוח לפאנל הצד */
+    width: 320px;
+    /* רקע כהה נקי */
+    background-color: #17212b;
+    /* קו מפריד אנכי מצד ימין */
+    border-right: 1px solid #232e3c;
+    /* סידור אנכי של החלקים */
+    display: flex;
+    flex-direction: column;
+    /* מניעת התכווצות */
+    flex-shrink: 0;
+    /* מניעת גלישה */
+    overflow: hidden;
+}
+
+/* חלק עליון של פאנל הצד */
+.sidebar-top {
+    /* פריסת שורה */
+    display: flex;
+    /* יישור למרכז */
+    align-items: center;
+    /* מרווח בין הכותרת לכפתור */
+    justify-content: space-between;
+    /* ריפוד פנימי */
+    padding: 16px 18px 12px;
+}
+
+/* כותרת רשימת ההודעות */
+.sidebar-top h2 {
+    /* גודל גופן */
+    font-size: 1.1rem;
+    /* משקל עבה */
+    font-weight: 700;
+    /* צבע טקסט בהיר */
+    color: #ffffff;
+}
+
+/* כפתור יצירת שיחה חדשה */
+.btn-create-chat {
+    /* גודל הכפתור */
+    width: 32px;
+    height: 32px;
+    /* פינות מעוגלות */
+    border-radius: 6px;
+    /* ביטול מסגרת */
+    border: none;
+    /* רקע שקוף */
+    background: transparent;
+    /* צבע אפור כחלחל */
+    color: #8b9bb0;
+    /* גודל אייקון */
+    font-size: 1rem;
+    /* סמן יד */
+    cursor: pointer;
+    /* מירכוז */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* מעבר חלק */
+    transition: all 0.2s ease;
+}
+
+/* אפקט ריחוף על כפתור שיחה חדשה */
+.btn-create-chat:hover {
+    /* צבע כחול */
+    color: #5288c1;
+    /* רקע קל */
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* תיבת שדה החיפוש */
+.search-container {
+    /* מיקום יחסי לזכוכית המגדלת */
+    position: relative;
+    /* ריפוד בצדדים ומלמטה */
+    padding: 0 16px 12px;
+}
+
+/* אייקון זכוכית מגדלת בתוך שדה החיפוש */
+.search-lens {
+    /* מיקום מוחלט משמאל */
+    position: absolute;
+    left: 28px;
+    /* מירכוז אנכי מדויק */
+    top: 38%;
+    transform: translateY(-50%);
+    /* צבע אפור שקט */
+    color: #6c7883;
+    /* גודל אייקון */
+    font-size: 0.85rem;
+    /* מניעת תפיסת לחיצות */
+    pointer-events: none;
+}
+
+/* שדה הקלדת החיפוש */
+#search-input {
+    /* רוחב מלא */
+    width: 100%;
+    /* ריפוד פנימי נוח כולל מקום לאייקון משמאל */
+    padding: 8px 12px 8px 34px;
+    /* רקע כהה מעט */
+    background: #0e1621;
+    /* מסגרת דקה */
+    border: 1px solid #232e3c;
+    /* פינות מעוגלות */
+    border-radius: 8px;
+    /* צבע טקסט בהיר */
+    color: #e5edf5;
+    /* גודל גופן */
+    font-size: 0.85rem;
+    /* מעבר חלק במסגרת */
+    transition: border-color 0.2s ease;
+}
+
+/* מצב כתיבה בתוך שדה החיפוש */
+#search-input:focus {
+    /* ביטול מסגרת ברירת מחדל */
+    outline: none;
+    /* מסגרת כחולה עדינה */
+    border-color: #5288c1;
+}
+
+/* צבע טקסט הרמז בשדה החיפוש */
+#search-input::placeholder {
+    color: #6c7883;
+}
+
+/* רשימת השיחות ואנשי הקשר */
+.chat-list {
+    /* תופס את שאר הגובה של הפאנל */
+    flex: 1;
+    /* גלילה אנכית בלבד */
+    overflow-y: auto;
+    /* ריפוד בצדדים */
+    padding: 0 8px 10px;
+}
+
+/* עיצוב פס גלילה מותאם אישית לרשימת השיחות */
+.chat-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.chat-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat-list::-webkit-scrollbar-thumb {
+    background: #232e3c;
+    border-radius: 4px;
+}
+
+/* פריט שיחה בודד ברשימה */
+.chat-item {
+    /* פריסת שורה */
+    display: flex;
+    /* יישור אנכי למרכז */
+    align-items: center;
+    /* רווח בין האווטאר לפרטים */
+    gap: 12px;
+    /* ריפוד פנימי נוח */
+    padding: 10px 10px;
+    /* פינות מעוגלות של הפריט */
+    border-radius: 10px;
+    /* סמן יד ללחיצה */
+    cursor: pointer;
+    /* מעבר חלק לשינוי רקע */
+    transition: background 0.15s ease;
+    /* מרווח קל בין פריטים */
+    margin-bottom: 2px;
+}
+
+/* אפקט ריחוף על פריט שיחה */
+.chat-item:hover {
+    /* רקע מואר מעט */
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* פריט שיחה פעיל שנבחר */
+.chat-item.active {
+    /* רקע כחול עמוק קלאסי כמו בטלגרם */
+    background: #2b5278;
+}
+
+/* עיגול האותיות של איש הקשר ברשימה */
+.chat-avatar {
+    /* מיקום יחסי לנקודת הסטטוס */
+    position: relative;
+    /* רוחב קבוע */
+    width: 42px;
+    /* גובה קבוע */
+    height: 42px;
+    /* עיגול מלא */
+    border-radius: 50%;
+    /* צבע אותיות בלבן */
+    color: #ffffff;
+    /* משקל עבה */
+    font-weight: 700;
+    /* גודל גופן */
+    font-size: 0.9rem;
+    /* מירכוז האותיות */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* מניעת התכווצות */
+    flex-shrink: 0;
+}
+
+/* צבעי רקע שונים של האווטארים */
+.avatar-blue {
+    background: #2b74b9;
+}
+
+.avatar-purple {
+    background: #8b5cf6;
+}
+
+.avatar-green {
+    background: #10b981;
+}
+
+.avatar-amber {
+    background: #f59e0b;
+}
+
+/* נקודה ירוקה קטנה לציון איש קשר מחובר */
+.status-dot {
+    /* מיקום מוחלט בפינה הימנית התחתונה */
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    /* רוחב הנקודה */
+    width: 10px;
+    /* גובה הנקודה */
+    height: 10px;
+    /* עיגול מלא */
+    border-radius: 50%;
+    /* רקע ירוק נקי */
+    background-color: #4fae4e;
+    /* מסגרת קטנה להפרדה מהאווטאר */
+    border: 2px solid #17212b;
+}
+
+/* פרטי השיחה לצד האווטאר */
+.chat-details {
+    /* תופס את שאר הרוחב */
+    flex: 1;
+    /* מניעת חריגה */
+    overflow: hidden;
+}
+
+/* שורה עליונה של שם ושעת ההודעה */
+.chat-title-row {
+    /* פריסת שורה */
+    display: flex;
+    /* מרווח בין השם לשעה */
+    justify-content: space-between;
+    /* יישור למרכז */
+    align-items: center;
+    /* מרווח קל מלמטה */
+    margin-bottom: 3px;
+}
+
+/* שם איש הקשר ברשימה */
+.chat-name {
+    /* גודל גופן */
+    font-size: 0.9rem;
+    /* משקל עבה למחצה */
+    font-weight: 600;
+    /* צבע לבן */
+    color: #ffffff;
+    /* חיתוך טקסט ארוך */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* שעת ההודעה האחרונה */
+.chat-time {
+    /* גודל גופן קטן */
+    font-size: 0.72rem;
+    /* צבע אפור כחלחל */
+    color: #708499;
+    /* מניעת התכווצות */
+    flex-shrink: 0;
+}
+
+/* צבע השעה כשהשיחה פעילה */
+.chat-item.active .chat-time {
+    color: #c0d6ec;
+}
+
+/* שורה תחתונה של תקציר ההודעה ותג */
+.chat-subtitle-row {
+    /* פריסת שורה */
+    display: flex;
+    /* מרווח בין התקציר לתג */
+    justify-content: space-between;
+    /* יישור למרכז */
+    align-items: center;
+}
+
+/* תקציר ההודעה האחרונה */
+.chat-preview {
+    /* גודל גופן */
+    font-size: 0.8rem;
+    /* צבע אפור */
+    color: #7e8c99;
+    /* חיתוך טקסט ארוך */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* תופס מקום */
+    flex: 1;
+}
+
+/* צבע תקציר ההודעה כשהשיחה פעילה */
+.chat-item.active .chat-preview {
+    color: #e5edf5;
+}
+
+/* תגית ספירת הודעות חדשות שלא נקראו */
+.unread-pill {
+    /* גודל מינימלי */
+    min-width: 18px;
+    height: 18px;
+    /* עיגול מלא */
+    border-radius: 9px;
+    /* רקע כחול עדין */
+    background: #5288c1;
+    /* צבע מספר בלבן */
+    color: #ffffff;
+    /* גודל מספר קטן */
+    font-size: 0.65rem;
+    /* משקל עבה */
+    font-weight: 700;
+    /* מירכוז המספר */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* ריפוד קל */
+    padding: 0 4px;
+}
+
+/* צבע תג ההודעות כשהשיחה פעילה */
+.chat-item.active .unread-pill {
+    background: #ffffff;
+    color: #2b5278;
+}
+
+/* חלון השיחה הראשי מימין */
+.chat-window {
+    /* תופס את שאר הרוחב הגדול של המסך */
+    flex: 1;
+    /* סידור אנכי של כותרת הודעות ושדה הקלדה */
+    display: flex;
+    flex-direction: column;
+    /* רקע כהה קלאסי ונקי */
+    background-color: #0e1621;
+    /* מניעת גלישה כללית */
+    overflow: hidden;
+}
+
+/* כותרת עליונה של חלון השיחה הנוכחי */
+.chat-header {
+    /* גובה קבוע */
+    height: 56px;
+    /* פריסת שורה */
+    display: flex;
+    /* יישור למרכז הגובה */
+    align-items: center;
+    /* רווח בין הצדדים */
+    justify-content: space-between;
+    /* ריפוד פנימי */
+    padding: 0 20px;
+    /* רקע זהה לפאנל העליון */
+    background: #17212b;
+    /* גבול תחתון עדין */
+    border-bottom: 1px solid #232e3c;
+    /* מניעת התכווצות */
+    flex-shrink: 0;
+}
+
+/* פרטי איש הקשר בכותרת השיחה */
+.contact-header-info {
+    /* סידור אופקי */
+    display: flex;
+    /* יישור למרכז */
+    align-items: center;
+    /* רווח בין האווטאר לשם */
+    gap: 12px;
+}
+
+/* אווטאר איש הקשר בכותרת */
+.header-avatar {
+    /* רוחב קבוע */
+    width: 38px;
+    /* גובה קבוע */
+    height: 38px;
+    /* עיגול מלא */
+    border-radius: 50%;
+    /* צבע אותיות בלבן */
+    color: #ffffff;
+    /* משקל עבה */
+    font-weight: 700;
+    /* גודל גופן */
+    font-size: 0.85rem;
+    /* מירכוז */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* שם איש הקשר בכותרת */
+.header-name {
+    /* גודל גופן */
+    font-size: 0.95rem;
+    /* משקל עבה */
+    font-weight: 600;
+    /* צבע לבן */
+    color: #ffffff;
+}
+
+/* שורת סטטוס זמינות בכותרת */
+.header-status {
+    /* גודל גופן קטן */
+    font-size: 0.75rem;
+    /* צבע כחול עדין */
+    color: #5288c1;
+}
+
+/* כפתורי פעולה בראש חלון השיחה */
+.header-tools {
+    /* פריסת שורה */
+    display: flex;
+    /* רווח בין הכפתורים */
+    gap: 6px;
+}
+
+/* כפתור כלי עבודה בכותרת */
+.tool-btn {
+    /* רוחב וגובה שווים */
+    width: 34px;
+    height: 34px;
+    /* פינות מעוגלות */
+    border-radius: 6px;
+    /* ביטול מסגרת */
+    border: none;
+    /* רקע שקוף */
+    background: transparent;
+    /* צבע אפור כחלחל */
+    color: #8b9bb0;
+    /* גודל אייקון */
+    font-size: 0.9rem;
+    /* סמן יד */
+    cursor: pointer;
+    /* מירכוז */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* מעבר חלק */
+    transition: all 0.2s ease;
+}
+
+/* אפקט ריחוף על כפתורי הכלים */
+.tool-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* אזור גלילת ההודעות בשיחה */
+.messages-flow {
+    /* תופס את שאר השטח הפנוי */
+    flex: 1;
+    /* גלילה אנכית */
+    overflow-y: auto;
+    /* ריפוד מסביב לבועות */
+    padding: 20px 24px;
+    /* סידור אנכי של שורות ההודעה */
+    display: flex;
+    flex-direction: column;
+    /* רווח בין בועה לבועה */
+    gap: 8px;
+}
+
+/* פס גלילה מותאם אישית לאזור ההודעות */
+.messages-flow::-webkit-scrollbar {
+    width: 4px;
+}
+
+.messages-flow::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.messages-flow::-webkit-scrollbar-thumb {
+    background: #232e3c;
+    border-radius: 4px;
+}
+
+/* תגית תאריך פשוטה במרכז השיחה */
+.date-badge {
+    /* מירכוז התגית */
+    display: flex;
+    justify-content: center;
+    /* מרווחים למעלה ולמטה */
+    margin: 8px 0;
+}
+
+/* עיצוב הטקסט בתוך תגית התאריך */
+.date-badge span {
+    /* רקע כהה שקט */
+    background: rgba(0, 0, 0, 0.3);
+    /* צבע טקסט אפור בהיר */
+    color: #8b9bb0;
+    /* גודל גופן קטן */
+    font-size: 0.72rem;
+    /* משקל בינוני */
+    font-weight: 500;
+    /* ריפוד עדין */
+    padding: 3px 12px;
+    /* פינות מעוגלות של התגית */
+    border-radius: 12px;
+}
+
+/* שורת מעטפת לבועת הודעה */
+.msg-row {
+    /* פריסת שורה */
+    display: flex;
+    /* רוחב מלא */
+    width: 100%;
+}
+
+/* הודעה נכנסת מיושרת לשמאל */
+.msg-row.incoming {
+    justify-content: flex-start;
+}
+
+/* הודעה יוצאת מיושרת לימין */
+.msg-row.outgoing {
+    justify-content: flex-end;
+}
+
+/* גוף בועת ההודעה */
+.msg-bubble {
+    /* רוחב מרבי של הבועה */
+    max-width: 65%;
+    /* ריפוד פנימי קומפקטי ונקי */
+    padding: 7px 11px 7px 13px;
+    /* פינות מעוגלות קלאסיות */
+    border-radius: 10px;
+    /* גודל גופן */
+    font-size: 0.9rem;
+    /* גובה שורה נוח */
+    line-height: 1.4;
+    /* פריסה שמאפשרת לטקסט ולשעה לשבת באותה שורה */
+    display: inline-flex;
+    /* מעבר שורה כשהטקסט ארוך */
+    flex-wrap: wrap;
+    /* יישור אנכי לחלק התחתון של השורה */
+    align-items: flex-end;
+    /* רווח עדין בין הטקסט לשעה */
+    gap: 8px;
+    /* צל קל מתחת לבועה */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* עיצוב בועת הודעה נכנסת */
+.msg-row.incoming .msg-bubble {
+    /* רקע כהה אלגנטי */
+    background: #182533;
+    /* צבע טקסט בהיר וקריא */
+    color: #f5f5f5;
+    /* פינה תחתונה שמאלית חדה */
+    border-bottom-left-radius: 2px;
+}
+
+/* עיצוב בועת הודעה יוצאת */
+.msg-row.outgoing .msg-bubble {
+    /* רקע כחול קלאסי כמו בטלגרם */
+    background: #2b5278;
+    /* צבע טקסט לבן */
+    color: #ffffff;
+    /* פינה תחתונה ימנית חדה */
+    border-bottom-right-radius: 2px;
+}
+
+/* טקסט ההודעה בבועה */
+.msg-text {
+    /* שבירת מילים ארוכות */
+    word-break: break-word;
+}
+
+/* אזור שעת ההודעה והאישורים באותה שורה */
+.msg-meta {
+    /* פריסת שורה */
+    display: inline-flex;
+    /* יישור אנכי למרכז הגובה */
+    align-items: center;
+    /* רווח בין השעה לסימון הוי */
+    gap: 3px;
+    /* דחיפה אוטומטית לקצה */
+    margin-left: auto;
+    /* מניעת שבירת שורה לשעה ולוי */
+    white-space: nowrap;
+    /* מניעת התכווצות */
+    flex-shrink: 0;
+}
+
+/* טקסט השעה המדויקת */
+.msg-time-text {
+    /* גודל גופן קטן ועדין */
+    font-size: 0.68rem;
+    /* צבע אפור כחלחל רגוע */
+    color: #a0b0c0;
+}
+
+/* סימון וי כפול של הודעה שנקראה בסגנון וואטסאפ */
+.read-receipt {
+    /* תצוגה מיושרת עם האייקון */
+    display: inline-flex;
+    /* יישור אנכי למרכז */
+    align-items: center;
+    /* צבע תכלת מובהק של אישור קריאה כמו בוואטסאפ */
+    color: #53bdeb;
+    /* מרווח קל משמאל לשעה */
+    margin-left: 3px;
+}
+
+/* אייקון וי כפול וקטורי בסגנון וואטסאפ */
+.wa-check-svg {
+    /* תצוגה בשורה */
+    display: inline-block;
+    /* יישור אנכי מדויק לשורת הטקסט והשעה */
+    vertical-align: middle;
+    /* רוחב האייקון */
+    width: 17px;
+    /* גובה האייקון */
+    height: 12px;
+}
+
+/* שורת הקלדת ההודעה בתחתית חלון השיחה */
+.chat-input-area {
+    /* פריסת שורה */
+    display: flex;
+    /* יישור למרכז הגובה */
+    align-items: center;
+    /* רווח בין הרכיבים */
+    gap: 10px;
+    /* ריפוד פנימי */
+    padding: 12px 20px;
+    /* רקע זהה לפאנל העליון */
+    background: #17212b;
+    /* גבול עליון עדין */
+    border-top: 1px solid #232e3c;
+    /* מניעת התכווצות */
+    flex-shrink: 0;
+}
+
+/* כפתור צירוף קובץ בשורת ההקלדה */
+.input-action-btn {
+    /* גודל הכפתור */
+    width: 36px;
+    height: 36px;
+    /* פינות מעוגלות */
+    border-radius: 8px;
+    /* ביטול מסגרת */
+    border: none;
+    /* רקע שקוף */
+    background: transparent;
+    /* צבע אפור כחלחל */
+    color: #8b9bb0;
+    /* גודל אייקון */
+    font-size: 1.05rem;
+    /* סמן יד ללחיצה */
+    cursor: pointer;
+    /* מירכוז */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* מעבר חלק */
+    transition: all 0.2s ease;
+    /* מניעת התכווצות */
+    flex-shrink: 0;
+}
+
+/* אפקט ריחוף על כפתור צירוף קובץ */
+.input-action-btn:hover {
+    color: #5288c1;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* שדה הקלדת ההודעה הפשוט והנוח */
+.input-box {
+    /* תופס את שאר הרוחב */
+    flex: 1;
+    /* ריפוד פנימי נוח */
+    padding: 10px 14px;
+    /* רקע כהה שקט */
+    background: #0e1621;
+    /* מסגרת דקה */
+    border: 1px solid #232e3c;
+    /* פינות מעוגלות */
+    border-radius: 8px;
+    /* צבע טקסט בהיר וברור */
+    color: #e5edf5;
+    /* גודל גופן */
+    font-size: 0.9rem;
+    /* מעבר חלק למסגרת */
+    transition: border-color 0.2s ease;
+}
+
+/* מצב כתיבה בתוך שדה ההקלדה */
+.input-box:focus {
+    /* ביטול מסגרת רגילה */
+    outline: none;
+    /* מסגרת כחולה עדינה */
+    border-color: #5288c1;
+}
+
+/* טקסט הרמז בשדה ההקלדה */
+.input-box::placeholder {
+    color: #6c7883;
+}
+
+/* כפתור שליחה עגול בכחול נקי */
+.send-btn {
+    /* רוחב וגובה עגולים */
+    width: 38px;
+    height: 38px;
+    /* עיגול מושלם */
+    border-radius: 50%;
+    /* ביטול מסגרת */
+    border: none;
+    /* צבע כחול קלאסי */
+    background: #5288c1;
+    /* צבע אייקון בלבן */
+    color: #ffffff;
+    /* גודל אייקון */
+    font-size: 0.95rem;
+    /* מירכוז האייקון */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* סמן יד ללחיצה */
+    cursor: pointer;
+    /* מעבר חלק */
+    transition: all 0.2s ease;
+    /* מניעת התכווצות */
+    flex-shrink: 0;
+}
+
+/* אפקט ריחוף על כפתור השליחה */
+.send-btn:hover {
+    /* כחול מודגש מעט בריחוף */
+    background: #6298d1;
+    /* הגדלה קלה */
+    transform: scale(1.05);
+}
+
+/* אפקט לחיצה על כפתור השליחה */
+.send-btn:active {
+    /* התכווצות קלה */
+    transform: scale(0.96);
+}
+
+/* רקע כהה מטושטש מסביב לחלון ההגדרות */
+.settings-modal-backdrop {
+    /* מיקום קבוע על כל המסך */
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* רוחב וגובה מלאים */
+    width: 100vw;
+    height: 100vh;
+    /* צבע רקע שחור חצי שקוף */
+    background-color: rgba(0, 0, 0, 0.65);
+    /* טשטוש עדין של הרקע מאחור */
+    backdrop-filter: blur(3px);
+    /* שכבה עליונה ביותר */
+    z-index: 999;
+    /* מירכוז חלון ההגדרות באמצע המסך */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* קופסת חלון ההגדרות המרכזית */
+.settings-dialog {
+    /* רוחב מרבי של חלון ההגדרות */
+    width: 90%;
+    max-width: 440px;
+    /* רקע כהה תואם */
+    background-color: #17212b;
+    /* מסגרת עדינה */
+    border: 1px solid #232e3c;
+    /* פינות מעוגלות */
+    border-radius: 14px;
+    /* צל רך מסביב לחלון */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    /* סידור אנכי */
+    display: flex;
+    flex-direction: column;
+    /* מניעת גלישה */
+    overflow: hidden;
+}
+
+/* כותרת עליונה של חלון ההגדרות */
+.settings-header {
+    /* פריסת שורה */
+    display: flex;
+    /* יישור למרכז */
+    align-items: center;
+    /* מרווח בין הכותרת לכפתור סגירה */
+    justify-content: space-between;
+    /* ריפוד פנימי */
+    padding: 16px 20px;
+    /* גבול תחתון עדין */
+    border-bottom: 1px solid #232e3c;
+}
+
+/* כותרת הטקסט בהגדרות */
+.settings-header h3 {
+    /* גודל גופן */
+    font-size: 1.1rem;
+    /* משקל עבה */
+    font-weight: 700;
+    /* צבע לבן */
+    color: #ffffff;
+}
+
+/* כפתור איקס לסגירת ההגדרות */
+.settings-close-btn {
+    /* רוחב וגובה */
+    width: 30px;
+    height: 30px;
+    /* פינות מעוגלות */
+    border-radius: 6px;
+    /* ביטול מסגרת */
+    border: none;
+    /* רקע שקוף */
+    background: transparent;
+    /* צבע אפור כחלחל */
+    color: #8b9bb0;
+    /* גודל אייקון */
+    font-size: 1.1rem;
+    /* סמן יד */
+    cursor: pointer;
+    /* מירכוז */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* מעבר חלק */
+    transition: all 0.2s ease;
+}
+
+/* אפקט ריחוף על כפתור הסגירה */
+.settings-close-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* גוף תוכן ההגדרות */
+.settings-content {
+    /* ריפוד פנימי */
+    padding: 18px 20px;
+    /* סידור אנכי של הכרטיסיות */
+    display: flex;
+    flex-direction: column;
+    /* רווח בין כרטיסייה לכרטיסייה */
+    gap: 14px;
+}
+
+/* כרטיסיית הגדרה בודדת */
+.settings-card {
+    /* רקע כהה מעט */
+    background: #0e1621;
+    /* מסגרת דקה */
+    border: 1px solid #232e3c;
+    /* פינות מעוגלות */
+    border-radius: 10px;
+    /* ריפוד פנימי */
+    padding: 14px;
+}
+
+/* כותרת קטנה לכרטיסייה */
+.card-headline {
+    /* גודל גופן קטן */
+    font-size: 0.75rem;
+    /* משקל עבה למחצה */
+    font-weight: 600;
+    /* צבע כחול אפור */
+    color: #5288c1;
+    /* אותיות גדולות באנגלית */
+    text-transform: uppercase;
+    /* מרווח קל בין אותיות */
+    letter-spacing: 0.5px;
+    /* מרווח קל מלמטה */
+    margin-bottom: 12px;
+}
+
+/* שורת תצוגת הפרופיל */
+.profile-preview-row {
+    /* פריסת שורה */
+    display: flex;
+    /* יישור למרכז */
+    align-items: center;
+    /* רווח בין האווטאר לטקסט */
+    gap: 12px;
+}
+
+/* אווטאר גדול בחלון ההגדרות */
+.profile-avatar-large {
+    /* רוחב קבוע */
+    width: 44px;
+    /* גובה קבוע */
+    height: 44px;
+    /* עיגול מלא */
+    border-radius: 50%;
+    /* רקע כחול עמוק */
+    background: #2b5278;
+    /* צבע אותיות בלבן */
+    color: #ffffff;
+    /* גופן עבה */
+    font-weight: 700;
+    /* גודל גופן */
+    font-size: 1.1rem;
+    /* מירכוז */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* מניעת התכווצות */
+    flex-shrink: 0;
+}
+
+/* שם המשתמש בחלון ההגדרות */
+.settings-username {
+    /* גודל גופן */
+    font-size: 0.95rem;
+    /* משקל עבה */
+    font-weight: 600;
+    /* צבע לבן */
+    color: #ffffff;
+}
+
+/* אימייל המשתמש בחלון ההגדרות */
+.settings-usermail {
+    /* גודל גופן קטן */
+    font-size: 0.78rem;
+    /* צבע אפור כחלחל */
+    color: #708499;
+}
+
+/* שורת הגדרה פנימית בכרטיסייה */
+.setting-item-row {
+    /* פריסת שורה */
+    display: flex;
+    /* יישור למרכז */
+    align-items: center;
+    /* מרווח בין המידע לפעולה */
+    justify-content: space-between;
+    /* ריפוד אנכי */
+    padding: 8px 0;
+    /* גבול תחתון עדין בין הפריטים */
+    border-bottom: 1px solid rgba(35, 46, 60, 0.6);
+}
+
+/* ביטול הגבול התחתון לפריט האחרון */
+.setting-item-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+/* אזור הטקסטים של ההגדרה */
+.setting-info {
+    /* סידור אנכי */
+    display: flex;
+    flex-direction: column;
+}
+
+/* שם ההגדרה */
+.setting-label {
+    /* גודל גופן */
+    font-size: 0.85rem;
+    /* משקל עבה למחצה */
+    font-weight: 600;
+    /* צבע לבן */
+    color: #e5edf5;
+}
+
+/* תיאור ההגדרה */
+.setting-desc {
+    /* גודל גופן קטן */
+    font-size: 0.72rem;
+    /* צבע אפור */
+    color: #708499;
+}
+
+/* תגית ירוקה לסטטוס פעיל */
+.setting-badge-green {
+    /* גודל גופן קטן */
+    font-size: 0.72rem;
+    /* משקל עבה */
+    font-weight: 600;
+    /* צבע ירוק */
+    color: #4fae4e;
+    /* רקע ירוק עדין */
+    background: rgba(79, 174, 78, 0.12);
+    /* מסגרת ירוקה דקה */
+    border: 1px solid rgba(79, 174, 78, 0.25);
+    /* ריפוד פנימי */
+    padding: 3px 8px;
+    /* פינות מעוגלות */
+    border-radius: 6px;
+}
+
+/* כפתור קישור פשוט לשינוי סיסמה */
+.setting-link-btn {
+    /* גודל גופן קטן */
+    font-size: 0.75rem;
+    /* משקל עבה למחצה */
+    font-weight: 600;
+    /* צבע כחול */
+    color: #5288c1;
+    /* רקע שקט */
+    background: rgba(82, 136, 193, 0.1);
+    /* מסגרת דקה */
+    border: 1px solid rgba(82, 136, 193, 0.25);
+    /* ביטול קו תחתון */
+    text-decoration: none;
+    /* ריפוד פנימי */
+    padding: 4px 10px;
+    /* פינות מעוגלות */
+    border-radius: 6px;
+    /* מעבר חלק */
+    transition: background 0.2s ease;
+}
+
+/* אפקט ריחוף על כפתור קישור */
+.setting-link-btn:hover {
+    background: rgba(82, 136, 193, 0.2);
+    color: #79aee4;
+}
+
+/* אזור תחתון של חלון ההגדרות */
+.settings-footer {
+    /* ריפוד פנימי */
+    padding: 12px 20px 16px;
+    /* פריסת שורה */
+    display: flex;
+    /* הצמדה לימין */
+    justify-content: flex-end;
+    /* גבול עליון עדין */
+    border-top: 1px solid #232e3c;
+}
+
+/* כפתור סיום וסגירה */
+.btn-settings-done {
+    /* ריפוד פנימי */
+    padding: 8px 18px;
+    /* פינות מעוגלות */
+    border-radius: 8px;
+    /* ביטול מסגרת */
+    border: none;
+    /* רקע כחול קלאסי */
+    background: #5288c1;
+    /* צבע טקסט בלבן */
+    color: #ffffff;
+    /* גודל גופן */
+    font-size: 0.85rem;
+    /* משקל עבה למחצה */
+    font-weight: 600;
+    /* סמן יד ללחיצה */
+    cursor: pointer;
+    /* מעבר חלק */
+    transition: background 0.2s ease;
+}
+
+/* אפקט ריחוף על כפתור הסיום */
+.btn-settings-done:hover {
+    background: #6298d1;
+}
